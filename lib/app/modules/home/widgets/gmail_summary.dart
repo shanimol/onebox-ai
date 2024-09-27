@@ -55,7 +55,7 @@ class GmailSummary extends StatelessWidget {
           ),
           Text(
             '${controller.emailList.length} emails',
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColors.black,
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -65,6 +65,7 @@ class GmailSummary extends StatelessWidget {
             height: 2,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'FROM: ',
@@ -74,7 +75,7 @@ class GmailSummary extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Row(
+              Wrap(
                 children: List.generate(senderList.length, (index) {
                   return Text(
                     '@${senderList[index]?.firstName} ',
@@ -100,10 +101,10 @@ class GmailSummary extends StatelessWidget {
               const SizedBox(
                 width: 6,
               ),
-              Text(
+              const Text(
                 'Summary',
                 style: TextStyle(
-                  color: AppColors.black.withOpacity(0.56),
+                  color: AppColors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -133,7 +134,7 @@ class GmailSummary extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: AppColors.black.withOpacity(0.8),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
@@ -186,7 +187,7 @@ class GmailSummary extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               AnimatedTap(
