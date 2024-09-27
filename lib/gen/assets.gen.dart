@@ -15,6 +15,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/AI.png
   AssetGenImage get ai => const AssetGenImage('assets/images/AI.png');
 
+  /// File path: assets/images/Union.png
+  AssetGenImage get union => const AssetGenImage('assets/images/Union.png');
+
   /// File path: assets/images/action_items.png
   AssetGenImage get actionItems =>
       const AssetGenImage('assets/images/action_items.png');
@@ -25,6 +28,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/assign.png
   AssetGenImage get assign => const AssetGenImage('assets/images/assign.png');
 
+  /// File path: assets/images/clock.png
+  AssetGenImage get clock => const AssetGenImage('assets/images/clock.png');
+
+  /// File path: assets/images/confluence.png
+  AssetGenImage get confluence =>
+      const AssetGenImage('assets/images/confluence.png');
+
   /// File path: assets/images/delete.png
   AssetGenImage get delete => const AssetGenImage('assets/images/delete.png');
 
@@ -34,11 +44,38 @@ class $AssetsImagesGen {
   /// File path: assets/images/expand.png
   AssetGenImage get expand => const AssetGenImage('assets/images/expand.png');
 
+  /// File path: assets/images/figma.png
+  AssetGenImage get figma => const AssetGenImage('assets/images/figma.png');
+
   /// File path: assets/images/filter.png
   AssetGenImage get filter => const AssetGenImage('assets/images/filter.png');
 
   /// File path: assets/images/gmail.png
   AssetGenImage get gmail => const AssetGenImage('assets/images/gmail.png');
+
+  /// File path: assets/images/gmeet.png
+  AssetGenImage get gmeet => const AssetGenImage('assets/images/gmeet.png');
+
+  /// File path: assets/images/google.jpeg
+  AssetGenImage get google => const AssetGenImage('assets/images/google.jpeg');
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/navbar1.png
+  AssetGenImage get navbar1 => const AssetGenImage('assets/images/navbar1.png');
+
+  /// File path: assets/images/navbar2.png
+  AssetGenImage get navbar2 => const AssetGenImage('assets/images/navbar2.png');
+
+  /// File path: assets/images/navbar3.png
+  AssetGenImage get navbar3 => const AssetGenImage('assets/images/navbar3.png');
+
+  /// File path: assets/images/navbar4.png
+  AssetGenImage get navbar4 => const AssetGenImage('assets/images/navbar4.png');
+
+  /// File path: assets/images/profile.png
+  AssetGenImage get profile => const AssetGenImage('assets/images/profile.png');
 
   /// File path: assets/images/search.png
   AssetGenImage get search => const AssetGenImage('assets/images/search.png');
@@ -46,19 +83,47 @@ class $AssetsImagesGen {
   /// File path: assets/images/send.png
   AssetGenImage get send => const AssetGenImage('assets/images/send.png');
 
+  /// File path: assets/images/slack.png
+  AssetGenImage get slack => const AssetGenImage('assets/images/slack.png');
+
+  /// File path: assets/images/slack1.png
+  AssetGenImage get slack1 => const AssetGenImage('assets/images/slack1.png');
+
+  /// File path: assets/images/task.png
+  AssetGenImage get task => const AssetGenImage('assets/images/task.png');
+
+  /// File path: assets/images/tick.png
+  AssetGenImage get tick => const AssetGenImage('assets/images/tick.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         ai,
+        union,
         actionItems,
         add,
         assign,
+        clock,
+        confluence,
         delete,
         excel,
         expand,
+        figma,
         filter,
         gmail,
+        gmeet,
+        google,
+        logo,
+        navbar1,
+        navbar2,
+        navbar3,
+        navbar4,
+        profile,
         search,
-        send
+        send,
+        slack,
+        slack1,
+        task,
+        tick
       ];
 }
 

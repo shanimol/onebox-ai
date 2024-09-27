@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class AppColors {
   const AppColors._();
 
+  static const Color nexusBg = Color(0xFFFAFAFA);
+
   static const Color primaryBlack = Color(0xFF1E1F1C);
   static const Color baseBlack = Color(0xFF0D0D0D);
   static const Color black60 = Color(0xFF666666);
