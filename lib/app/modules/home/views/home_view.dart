@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nexus/app/common/util/exports.dart';
-import 'package:nexus/app/modules/dashboard/views/dashboard_view.dart';
+import 'package:nexus/app/modules/home/widgets/dashboard_view.dart';
 import 'package:nexus/app/modules/home/widgets/meetings.dart';
 import 'package:nexus/app/modules/home/widgets/platform_updates.dart';
 import 'package:nexus/app/routes/app_pages.dart';
