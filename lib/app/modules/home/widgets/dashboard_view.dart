@@ -7,6 +7,7 @@ import 'package:nexus/app/modules/home/widgets/slack_summary.dart';
 import 'package:nexus/app/modules/home/widgets/task_card.dart';
 import 'package:nexus/app/modules/home/widgets/task_chart.dart';
 
+import '../../../../gen/fonts.gen.dart';
 import 'dashboard_right_drawer.dart';
 
 class DashboardView extends StatelessWidget {
@@ -100,20 +101,37 @@ class DashboardView extends StatelessWidget {
           Radius.circular(22),
         ),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TaskChart(),
+          Text(
+            "What’s been up?",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+              fontFamily: FontFamily.iBMPlexSans,
+            ),
+          ),
           SizedBox(
-            width: 14,
+            height: 10,
           ),
-          GmailSummary(
-            controller: controller,
-          ),
-          SizedBox(
-            width: 14,
-          ),
-          SlackSummary(
-            controller: controller,
+          Row(
+            children: [
+              TaskChart(),
+              SizedBox(
+                width: 14,
+              ),
+              GmailSummary(
+                controller: controller,
+              ),
+              SizedBox(
+                width: 14,
+              ),
+              SlackSummary(
+                controller: controller,
+              ),
+            ],
           ),
         ],
       ),

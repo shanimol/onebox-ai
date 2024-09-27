@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nexus/app/common/util/exports.dart';
 import 'package:nexus/app/modules/home/widgets/dashboard_view.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 import '../../../../gen/assets.gen.dart';
+import '../../../common/values/app_colors.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/chat/chat.dart';
 import '../widgets/integrations/integrations.dart';
@@ -38,7 +38,6 @@ class HomeView extends GetView<HomeController> {
         centerTitle: false,
       ),
       body: Obx(() {
-        
         return Row(
           children: [
             // SidebarX for navigation
@@ -46,13 +45,17 @@ class HomeView extends GetView<HomeController> {
               controller: controller.sideBarController,
               theme: SidebarXTheme(
                 margin: const EdgeInsets.only(
-                  left: 11,
+                  left: 10,
                   right: 11,
                   //top: 29,
-                  bottom: 29,
                 ),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
+                  border: Border(
+                    right: BorderSide(
+                      color: AppColors.gray19.withOpacity(0.2),
+                    ),
+                  ),
                 ),
                 hoverColor: Colors.amberAccent,
                 selectedItemDecoration: BoxDecoration(
@@ -66,8 +69,8 @@ class HomeView extends GetView<HomeController> {
                 SidebarXItem(
                   iconBuilder: (selected, hovered) {
                     return Assets.images.navbar4.image(
-                      height: 44,
-                      width: 44,
+                      height: 42,
+                      width: 42,
                     );
                   },
                   //label: 'Home',
@@ -78,8 +81,8 @@ class HomeView extends GetView<HomeController> {
                 SidebarXItem(
                   iconBuilder: (selected, hovered) {
                     return Assets.images.navbar2.image(
-                      height: 44,
-                      width: 44,
+                      height: 42,
+                      width: 42,
                     );
                   },
                   onTap: () {
@@ -89,8 +92,8 @@ class HomeView extends GetView<HomeController> {
                 SidebarXItem(
                   iconBuilder: (selected, hovered) {
                     return Assets.images.navbar3.image(
-                      height: 44,
-                      width: 44,
+                      height: 42,
+                      width: 42,
                     );
                   },
                   onTap: () {
@@ -100,8 +103,8 @@ class HomeView extends GetView<HomeController> {
                 SidebarXItem(
                   iconBuilder: (selected, hovered) {
                     return Assets.images.navbar1.image(
-                      height: 44,
-                      width: 44,
+                      height: 42,
+                      width: 42,
                     );
                   },
                   onTap: () {
@@ -128,10 +131,13 @@ class HomeView extends GetView<HomeController> {
           controller: controller,
         );
       case 1:
-        return Directionality(
-          textDirection: TextDirection.ltr,
-          child: ChatPage(
-            controller: controller,
+        return Padding(
+          padding: EdgeInsets.only(bottom: 24),
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: ChatPage(
+              controller: controller,
+            ),
           ),
         );
       case 2:

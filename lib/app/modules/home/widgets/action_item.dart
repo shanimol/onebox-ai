@@ -95,13 +95,13 @@ class ActionItem extends StatelessWidget {
                       height: 20,
                       width: 20,
                     ),
-                    const SizedBox(
-                      width: 13,
-                    ),
-                    Assets.images.tick.image(
-                      height: 20,
-                      width: 20,
-                    ),
+                    // const SizedBox(
+                    //   width: 13,
+                    // ),
+                    // Assets.images.tick.image(
+                    //   height: 20,
+                    //   width: 20,
+                    // ),
                   ],
                 ),
                 const SizedBox(
