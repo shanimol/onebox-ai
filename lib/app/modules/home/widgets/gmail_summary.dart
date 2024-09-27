@@ -86,7 +86,7 @@ class GmailSummary extends StatelessWidget {
                   () => Wrap(
                     children: List.generate(senderList.length, (index) {
                       return Text(
-                        '@${senderList[index]?.firstName} ',
+                        '@${senderList[index] ?? ''} ',
                         style: TextStyle(
                           color: AppColors.black.withOpacity(0.56),
                           fontSize: 14,
@@ -209,8 +209,9 @@ class GmailSummary extends StatelessWidget {
               ),
               AnimatedTap(
                 onTap: () {
-                  eventBus.fire(
-                      ChatEvent(message: "Did I miss any important task?"));
+                  eventBus.fire(ChatEvent(
+                      message:
+                          "Summarize all my today's emails ordered from top priority to least?"));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -238,7 +239,7 @@ class GmailSummary extends StatelessWidget {
     );
   }
 
-  List<User?> get senderList {
-    return controller.emaildata.map((e) => e.sender).toSet().toList();
+  List<String?> get senderList {
+    return controller.emaildata.map((e) => e.senderName).toSet().toList();
   }
 }

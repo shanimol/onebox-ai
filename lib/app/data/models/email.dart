@@ -38,18 +38,20 @@ import 'user.dart';
 //   }
 // }
 
-class Email implements JsonParsableClass{
+class Email implements JsonParsableClass {
   String? id;
   User? sender;
+  String? senderName;
   String? summary;
   DateTime? time;
 
-  Email({this.id, this.sender, this.summary, this.time});
+  Email({this.id, this.sender, this.senderName, this.summary, this.time});
 
   factory Email.fromMap(Map<String, dynamic> map) {
     return Email(
       id: map['id'],
       sender: map['sender'] != null ? User.fromMap(map['sender']) : null,
+      senderName: map['sender_name'],
       summary: map['summary'],
       time: map['time'] != null ? DateTime.parse(map['time']) : null,
     );
@@ -59,6 +61,7 @@ class Email implements JsonParsableClass{
     return {
       'id': id,
       'sender': sender?.toMap(),
+      'senderName': senderName,
       'summary': summary,
       'time': time?.toIso8601String(),
     };
@@ -71,6 +74,7 @@ class Email implements JsonParsableClass{
     return other is Email &&
         other.id == id &&
         other.sender == sender &&
+        other.senderName == senderName &&
         other.summary == summary &&
         other.time == time;
   }
@@ -79,6 +83,7 @@ class Email implements JsonParsableClass{
   int get hashCode {
     return id.hashCode ^
         sender.hashCode ^
+        senderName.hashCode ^
         summary.hashCode ^
         time.hashCode;
   }

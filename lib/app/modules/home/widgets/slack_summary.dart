@@ -7,6 +7,9 @@ import 'package:nexus/app/data/models/slack.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
+import '../../../common/event_bus/events.dart';
+import '../../../widgets/common/animated_tap.dart';
+
 class SlackSummary extends StatelessWidget {
   final HomeController controller;
   const SlackSummary({required this.controller, super.key});
@@ -198,21 +201,28 @@ class SlackSummary extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
+              AnimatedTap(
+                onTap: () {
+                  eventBus.fire(ChatEvent(
+                      message:
+                          'Summarize all my slack communications received in the last 24 hrs.'));
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                    color: Color(0xFF695DF0),
                   ),
-                  color: Color(0xFF695DF0),
-                ),
-                height: 36,
-                padding: const EdgeInsets.all(8),
-                child: const Text(
-                  'View details',
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  height: 36,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text(
+                    'View details',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
