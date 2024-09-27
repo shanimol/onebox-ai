@@ -210,6 +210,8 @@ class TaskCard extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(19),
                     topRight: Radius.circular(19),
+                    bottomLeft: Radius.circular(19),
+                    bottomRight: Radius.circular(19),
                   ),
                 ),
                 child: Obx(
