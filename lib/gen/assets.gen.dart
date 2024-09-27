@@ -79,6 +79,10 @@ class $AssetsImagesGen {
   AssetGenImage get greentick =>
       const AssetGenImage('assets/images/greentick.png');
 
+  /// File path: assets/images/login_image.png
+  AssetGenImage get loginImage =>
+      const AssetGenImage('assets/images/login_image.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -176,6 +180,7 @@ class $AssetsImagesGen {
         google,
         greenTick,
         greentick,
+        loginImage,
         logo,
         logo1,
         logo2,

@@ -29,12 +29,14 @@ class DashboardView extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: Padding(
-                  padding: const EdgeInsets.all(25),
+                  padding: const EdgeInsets.only(left: 25, right: 25),
                   child: SingleChildScrollView(
-                    
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: 25,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -121,6 +123,9 @@ class DashboardView extends StatelessWidget {
                               height: 19,
                             ),
                             updates(),
+                            SizedBox(
+                              height: 25,
+                            ),
                           ],
                         )
                       ],
