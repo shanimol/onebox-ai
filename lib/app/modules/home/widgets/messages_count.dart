@@ -63,7 +63,7 @@ class MessagesCount extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(16)),
             backgroundColor: Color(0xFFF0F0F0),
             valueColor: AlwaysStoppedAnimation<Color>(
-              Color(0xFFD72F59),
+              Color(0xFF695DF0),
             ),
           )
         ],

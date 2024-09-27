@@ -62,7 +62,7 @@ class TaskCard extends StatelessWidget {
                         border: Border(
                           bottom: BorderSide(
                             color: controller.taskCardSectionIndex.value == 0
-                                ? const Color(0xFFD72F59)
+                                ? const Color(0xFF695DF0)
                                 : const Color(0xFFF0F2F5),
                           ),
                         ),
@@ -76,7 +76,7 @@ class TaskCard extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               height: 20.3 / 14,
                               color: controller.taskCardSectionIndex.value == 0
-                                  ? const Color(0xFFD72F59)
+                                  ? const Color(0xFF695DF0)
                                   : const Color(0xFF344054),
                             ),
                           ),
@@ -93,7 +93,7 @@ class TaskCard extends StatelessWidget {
                                 ),
                               ),
                               color: controller.taskCardSectionIndex.value == 0
-                                  ? const Color(0xFFD72F59)
+                                  ? const Color(0xFF695DF0)
                                   : const Color(0xFFF0F2F5),
                             ),
                             child: Center(
@@ -131,7 +131,7 @@ class TaskCard extends StatelessWidget {
                         border: Border(
                           bottom: BorderSide(
                             color: controller.taskCardSectionIndex.value == 1
-                                ? const Color(0xFFD72F59)
+                                ? const Color(0xFF695DF0)
                                 : const Color(0xFFF0F2F5),
                           ),
                         ),
@@ -145,7 +145,7 @@ class TaskCard extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               height: 20.3 / 14,
                               color: controller.taskCardSectionIndex.value == 1
-                                  ? const Color(0xFFD72F59)
+                                  ? const Color(0xFF695DF0)
                                   : const Color(0xFF344054),
                             ),
                           ),
@@ -162,7 +162,7 @@ class TaskCard extends StatelessWidget {
                                 ),
                               ),
                               color: controller.taskCardSectionIndex.value == 1
-                                  ? const Color(0xFFD72F59)
+                                  ? const Color(0xFF695DF0)
                                   : const Color(0xFFF0F2F5),
                             ),
                             child: Center(

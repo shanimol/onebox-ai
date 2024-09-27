@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:nexus/app/data/models/meeting.dart';
+import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
 class Meetings extends StatefulWidget {
-  const Meetings({super.key});
+  final HomeController controller;
+  Meetings({required this.controller, super.key});
 
   @override
   State<Meetings> createState() => _MeetingsState();
@@ -71,62 +75,120 @@ class _MeetingsState extends State<Meetings> {
 
   Widget upcomingMeetings() {
     return Container(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(12),
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(9),
         ),
-        color: const Color(0xFFFBFBFB),
+        color: Color(0xFFFBFBFB),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'TODAY',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w500,
-                  height: 14 / 12,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'UPCOMING: ${upcomingMeetingsList.length}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    ),
+                    const Text(
+                      ' Sept 16, 2024',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              Text(
-                ' Sept 16, 2024',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w500,
-                  height: 14 / 12,
+                const SizedBox(height: 8),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return listItem(
+                      name: upcomingMeetingsList[index].title ?? '',
+                      time:
+                          '${formattedTime(upcomingMeetingsList[index].startTime)} - ${formattedTime(upcomingMeetingsList[index].endTime)}',
+                      index: index,
+                      buttonTitle: 'Prep me',
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 7),
+                  itemCount: upcomingMeetingsList.length,
                 ),
-              )
-            ],
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return listItem(
-                  name: 'Unilever & The Brand tech group',
-                  time: '4:00PM - 5:00PM',
-                  index: index,
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 7),
-              itemCount: 10, // Increase the itemCount for better scrolling test
+              ],
             ),
-          ),
-        ],
+            SizedBox(
+              height: 16,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'COMPLETED: ${completedMeetingsList.length}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    ),
+                    const Text(
+                      ' Sept 16, 2024',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 8),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return listItem(
+                        name: upcomingMeetingsList[index].title ?? '',
+                        time:
+                            '${formattedTime(completedMeetingsList[index].startTime)} - ${formattedTime(completedMeetingsList[index].endTime)}',
+                        index: index,
+                        buttonTitle: 'View insights');
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 7),
+                  itemCount: completedMeetingsList.length,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget listItem({String? name, String? time, required int index}) {
+  Widget listItem(
+      {String? name, String? time, required int index, String? buttonTitle}) {
     return AnimatedTap(
       onTap: () {
         setState(() {
@@ -138,15 +200,16 @@ class _MeetingsState extends State<Meetings> {
         decoration: BoxDecoration(
           border: index == selectedIndex
               ? Border.all(
-                  color: const Color(0xFFD72F59),
+                  color: const Color(0xFF695DF0),
                   width: 2,
                 )
               : Border.all(
                   color: Colors.transparent,
                 ),
           borderRadius: const BorderRadius.all(Radius.circular(8)),
-          color:
-              selectedIndex == index ? const Color(0xFFFCF0F3) : Colors.white,
+          color: selectedIndex == index
+              ? const Color(0xFF695DF0).withOpacity(0.09)
+              : Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -207,7 +270,7 @@ class _MeetingsState extends State<Meetings> {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(7),
                   ),
                   border: Border.all(
@@ -217,8 +280,8 @@ class _MeetingsState extends State<Meetings> {
                   ),
                   color: Colors.white,
                 ),
-                child: const Text(
-                  'Prep Me',
+                child: Text(
+                  buttonTitle ?? '',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 14,
@@ -233,4 +296,16 @@ class _MeetingsState extends State<Meetings> {
       ),
     );
   }
+
+  List<Meeting> get upcomingMeetingsList => widget.controller.meetingsList
+      .where((e) => (e.startTime ?? DateTime.now()).isAfter(DateTime.now()))
+      .toList();
+
+  String formattedTime(DateTime? date) {
+    return DateFormat('ha').format(date ?? DateTime.now()).toLowerCase(); // C
+  }
+
+  List<Meeting> get completedMeetingsList => widget.controller.meetingsList
+      .where((e) => (e.startTime ?? DateTime.now()).isBefore(DateTime.now()))
+      .toList();
 }

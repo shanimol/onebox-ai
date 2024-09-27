@@ -22,7 +22,7 @@ class HomeView extends GetView<HomeController> {
             top: 8,
             bottom: 8,
           ),
-          child: Assets.images.union.image(
+          child: Assets.images.logoViolet.image(
             height: 40,
             width: 40,
           ),

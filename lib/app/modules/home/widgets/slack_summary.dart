@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
+import 'package:nexus/app/data/models/user.dart';
+import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
-class Summary extends StatelessWidget {
-  const Summary({super.key});
+class SlackSummary extends StatelessWidget {
+  final HomeController controller;
+  const SlackSummary({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 340,
-      //height: 320,
       padding: const EdgeInsets.all(12),
       decoration: const BoxDecoration(
         color: Color(0xFFFBFBFB),
@@ -22,7 +24,7 @@ class Summary extends StatelessWidget {
         children: [
           Row(
             children: [
-              Assets.images.gmail.image(
+              Assets.images.slack.image(
                 height: 20,
                 width: 20,
               ),
@@ -30,7 +32,7 @@ class Summary extends StatelessWidget {
                 width: 6,
               ),
               const Text(
-                'GMAIL',
+                'SLACK',
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 12,
@@ -42,8 +44,8 @@ class Summary extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          const Text(
-            'data',
+          Text(
+            '${controller.slackList.length} emails',
             style: TextStyle(
               color: AppColors.black,
               fontSize: 14,
@@ -53,13 +55,29 @@ class Summary extends StatelessWidget {
           const SizedBox(
             height: 2,
           ),
-          Text(
-            'data',
-            style: TextStyle(
-              color: AppColors.black.withOpacity(0.56),
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
+          Row(
+            children: [
+              Text(
+                'FROM: ',
+                style: TextStyle(
+                  color: AppColors.black.withOpacity(0.56),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Row(
+                children: List.generate(senderList.length, (index) {
+                  return Text(
+                    '@${senderList[index]?.firstName} ',
+                    style: TextStyle(
+                      color: AppColors.black.withOpacity(0.56),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  );
+                }),
+              )
+            ],
           ),
           const SizedBox(
             height: 16,
@@ -101,8 +119,15 @@ class Summary extends StatelessWidget {
                           Radius.circular(9),
                         ),
                         color: Color(0XFFF0F0F0)),
-                    child: const Text(
-                      'djsdhbksbkdjhkd',
+                    child: Text(
+                      controller.slackList[index].summary ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -160,7 +185,7 @@ class Summary extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(8),
                   ),
-                  color: Color(0xFFD72F59),
+                  color: Color(0xFF695DF0),
                 ),
                 height: 36,
                 padding: const EdgeInsets.all(8),
@@ -178,5 +203,9 @@ class Summary extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<User?> get senderList {
+    return controller.slackList.map((e) => e.sender).toSet().toList();
   }
 }

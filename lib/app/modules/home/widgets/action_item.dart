@@ -152,7 +152,7 @@ class _ActionItemState extends State<ActionItem> {
         vertical: 8.5,
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFFD72F59),
+        color: const Color(0xFF695DF0),
         borderRadius: BorderRadius.circular(
           6,
         ),

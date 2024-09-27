@@ -61,13 +61,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/gmail.png
   AssetGenImage get gmail => const AssetGenImage('assets/images/gmail.png');
 
-  /// File path: assets/images/meet.png
-  AssetGenImage get meet => const AssetGenImage('assets/images/meet.png');
   /// File path: assets/images/gmeet.png
   AssetGenImage get gmeet => const AssetGenImage('assets/images/gmeet.png');
 
   /// File path: assets/images/google.jpeg
   AssetGenImage get google => const AssetGenImage('assets/images/google.jpeg');
+
   /// File path: assets/images/green_tick.png
   AssetGenImage get greenTick =>
       const AssetGenImage('assets/images/green_tick.png');
@@ -98,9 +97,16 @@ class $AssetsImagesGen {
   AssetGenImage get logoCollection =>
       const AssetGenImage('assets/images/logo_collection.png');
 
+  /// File path: assets/images/logo_violet.png
+  AssetGenImage get logoViolet =>
+      const AssetGenImage('assets/images/logo_violet.png');
+
   /// File path: assets/images/mask_group.png
   AssetGenImage get maskGroup =>
       const AssetGenImage('assets/images/mask_group.png');
+
+  /// File path: assets/images/meet.png
+  AssetGenImage get meet => const AssetGenImage('assets/images/meet.png');
 
   /// File path: assets/images/menu.png
   AssetGenImage get menu => const AssetGenImage('assets/images/menu.png');
@@ -131,6 +137,7 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/slack1.png
   AssetGenImage get slack1 => const AssetGenImage('assets/images/slack1.png');
+
   /// File path: assets/images/source.png
   AssetGenImage get source => const AssetGenImage('assets/images/source.png');
 
@@ -160,7 +167,6 @@ class $AssetsImagesGen {
         figma,
         filter,
         gmail,
-        meet,
         gmeet,
         google,
         greenTick,
@@ -172,7 +178,9 @@ class $AssetsImagesGen {
         logo4,
         logo5,
         logoCollection,
+        logoViolet,
         maskGroup,
+        meet,
         menu,
         navbar1,
         navbar2,
@@ -194,6 +202,10 @@ class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const String messages = 'assets/messages.json';
+
+  /// List of all assets
+  static List<String> get values => [messages];
 }
 
 class AssetGenImage {
