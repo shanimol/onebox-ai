@@ -15,6 +15,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/AI.png
   AssetGenImage get ai => const AssetGenImage('assets/images/AI.png');
 
+  /// File path: assets/images/Union.png
+  AssetGenImage get union => const AssetGenImage('assets/images/Union.png');
+
   /// File path: assets/images/action_items.png
   AssetGenImage get actionItems =>
       const AssetGenImage('assets/images/action_items.png');
@@ -33,6 +36,8 @@ class $AssetsImagesGen {
   AssetGenImage get calendarHomeSuffix =>
       const AssetGenImage('assets/images/calendar_home_suffix.png');
 
+  /// File path: assets/images/clock.png
+  AssetGenImage get clock => const AssetGenImage('assets/images/clock.png');
   /// File path: assets/images/confluence.png
   AssetGenImage get confluence =>
       const AssetGenImage('assets/images/confluence.png');
@@ -57,6 +62,26 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/meet.png
   AssetGenImage get meet => const AssetGenImage('assets/images/meet.png');
+  /// File path: assets/images/gmeet.png
+  AssetGenImage get gmeet => const AssetGenImage('assets/images/gmeet.png');
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/navbar1.png
+  AssetGenImage get navbar1 => const AssetGenImage('assets/images/navbar1.png');
+
+  /// File path: assets/images/navbar2.png
+  AssetGenImage get navbar2 => const AssetGenImage('assets/images/navbar2.png');
+
+  /// File path: assets/images/navbar3.png
+  AssetGenImage get navbar3 => const AssetGenImage('assets/images/navbar3.png');
+
+  /// File path: assets/images/navbar4.png
+  AssetGenImage get navbar4 => const AssetGenImage('assets/images/navbar4.png');
+
+  /// File path: assets/images/profile.png
+  AssetGenImage get profile => const AssetGenImage('assets/images/profile.png');
 
   /// File path: assets/images/search.png
   AssetGenImage get search => const AssetGenImage('assets/images/search.png');
@@ -76,11 +101,13 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         ai,
+        union,
         actionItems,
         add,
         assign,
         calendarHome,
         calendarHomeSuffix,
+        clock,
         confluence,
         delete,
         excel,
@@ -89,6 +116,13 @@ class $AssetsImagesGen {
         filter,
         gmail,
         meet,
+        gmeet,
+        logo,
+        navbar1,
+        navbar2,
+        navbar3,
+        navbar4,
+        profile,
         search,
         send,
         slack,

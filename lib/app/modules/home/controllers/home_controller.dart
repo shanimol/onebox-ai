@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:nexus/app/common/util/extensions.dart';
 import 'package:nexus/app/data/models/calendar_task.dart';
 import 'package:nexus/app/data/models/task.dart';
+import 'package:sidebarx/sidebarx.dart';
 
 import '../../../data/models/configuration.dart';
 import '../../../data/repository/app.dart';
@@ -9,6 +10,9 @@ import '../../../data/repository/app.dart';
 class HomeController extends GetxController {
   //TODO: Implement HomeController
   final IAppRepository repository;
+  final sideBarController =
+      SidebarXController(selectedIndex: 0, extended: true);
+  final RxInt selectedNavbarIndex = 0.obs;
 
   HomeController({required this.repository});
 
