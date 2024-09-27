@@ -1,44 +1,44 @@
 import 'package:nexus/app/data/models/class_factories.dart';
 import 'user.dart';
 
-class EmailData implements JsonParsableClass {
-  List<Email>? emails;
-  String? summary;
+// class EmailData implements JsonParsableClass {
+//   List<Email>? emails;
+//   String? summary;
 
-  EmailData({this.emails, this.summary});
+//   EmailData({this.emails, this.summary});
 
-  factory EmailData.fromMap(Map<String, dynamic> map) {
-    return EmailData(
-      emails: map['emails'] != null
-          ? List<Email>.from(map['emails'].map((x) => Email.fromMap(x)))
-          : null,
-      summary: map['summary'],
-    );
-  }
+//   factory EmailData.fromMap(Map<String, dynamic> map) {
+//     return EmailData(
+//       emails: map['emails'] != null
+//           ? List<Email>.from(map['emails'].map((x) => Email.fromMap(x)))
+//           : null,
+//       summary: map['summary'],
+//     );
+//   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'emails': emails?.map((x) => x.toMap()).toList(),
-      'summary': summary,
-    };
-  }
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'emails': emails?.map((x) => x.toMap()).toList(),
+//       'summary': summary,
+//     };
+//   }
 
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+//   @override
+//   bool operator ==(Object other) {
+//     if (identical(this, other)) return true;
 
-    return other is EmailData &&
-        other.emails == emails &&
-        other.summary == summary;
-  }
+//     return other is EmailData &&
+//         other.emails == emails &&
+//         other.summary == summary;
+//   }
 
-  @override
-  int get hashCode {
-    return emails.hashCode ^ summary.hashCode;
-  }
-}
+//   @override
+//   int get hashCode {
+//     return emails.hashCode ^ summary.hashCode;
+//   }
+// }
 
-class Email {
+class Email implements JsonParsableClass{
   String? id;
   User? sender;
   String? summary;

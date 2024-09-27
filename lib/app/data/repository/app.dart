@@ -25,9 +25,9 @@ abstract class IAppRepository {
   Future<Either<dynamic, Configuration>> getData();
   Future<Either<dynamic, List<task.Task>>> getTasks();
   Future<Either<dynamic, List<Meeting>>> getMeetings();
-  Future<Either<dynamic, EmailData>> getEmails();
-  Future<Either<dynamic, SlackData>> getSlackMessages();
   Future<Either<dynamic, ChatResponse>> getAIChatResponse(String message);
+  Future<Either<dynamic, List<Email>>> getEmails();
+  Future<Either<dynamic, List<Slack>>> getSlackMessages();
 }
 
 @Injectable(as: IAppRepository, env: [ServiceEnv.app])
@@ -83,14 +83,14 @@ class AppRepository extends IAppRepository {
   }
 
   @override
-  Future<Either<dynamic, EmailData>> getEmails() async {
+  Future<Either<dynamic, List<Email>>> getEmails() async {
     dynamic response;
     try {
       response = await api.get(
         uri: '$baseUrl/email/',
       );
       final result = await compute(
-        Utils.extractClassFromJson<EmailData>,
+        Utils.extractClassListFromJson<Email>,
         response["data"],
       );
       return Right(result);
@@ -100,14 +100,14 @@ class AppRepository extends IAppRepository {
   }
 
   @override
-  Future<Either<dynamic, SlackData>> getSlackMessages() async {
+  Future<Either<dynamic, List<Slack>>> getSlackMessages() async {
     dynamic response;
     try {
       response = await api.get(
         uri: '$baseUrl/slackmessages/',
       );
       final result = await compute(
-        Utils.extractClassFromJson<SlackData>,
+        Utils.extractClassListFromJson<Slack>,
         response["data"],
       );
       return Right(result);

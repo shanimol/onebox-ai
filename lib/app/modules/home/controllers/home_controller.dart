@@ -5,7 +5,6 @@ import 'package:nexus/app/data/models/email.dart';
 import 'package:nexus/app/data/models/meeting.dart';
 import 'package:nexus/app/data/models/slack.dart';
 import 'package:nexus/app/data/models/task.dart';
-import 'package:nexus/app/data/models/user.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 import '../../../data/models/configuration.dart';
@@ -30,9 +29,9 @@ class HomeController extends GetxController {
 
   RxList<Meeting> meetings = <Meeting>[].obs;
 
-  Rxn<EmailData?> emaildata = Rxn<EmailData?>();
+  RxList<Email> emaildata = RxList<Email>();
 
-  Rxn<SlackData?> slackData = Rxn<SlackData?>();
+  RxList<Slack> slackData = RxList<Slack>();
 
   @override
   void onInit() async {
@@ -99,14 +98,14 @@ class HomeController extends GetxController {
   Future<void> setEmails() async {
     try {
       var response = await repository.getEmails();
-      emaildata.value = response.getRight();
+      emaildata.value = response.getRight()?? [];
     } catch (e) {}
   }
 
   Future<void> setSlackMessages() async {
     try {
       var response = await repository.getSlackMessages();
-      slackData.value = response.getRight();
+      slackData.value = response.getRight()?? [];
     } catch (e) {}
   }
 }

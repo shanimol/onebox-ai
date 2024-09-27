@@ -12,9 +12,9 @@ class ClassFactories {
     // User: (dynamic x) => User.fromJson(x),
     Task: (dynamic x) => Task.fromMap(x),
     Meeting: (dynamic x) => Meeting.fromMap(x),
-    EmailData: (dynamic x) => EmailData.fromMap(x),
-    SlackData: (dynamic x) => SlackData.fromMap(x),
     ChatResponse: (dynamic x) => ChatResponse.fromJson(x),
+    Email: (dynamic x) => Email.fromMap(x),
+    Slack: (dynamic x) => Slack.fromJson(x),
   };
 }
 

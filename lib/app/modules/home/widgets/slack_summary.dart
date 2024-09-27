@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/data/models/slack.dart';
-import 'package:nexus/app/data/models/user.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/gen/assets.gen.dart';
+
+import '../../../common/event_bus/events.dart';
+import '../../../widgets/common/animated_tap.dart';
 
 class SlackSummary extends StatelessWidget {
   final HomeController controller;
@@ -51,7 +53,7 @@ class SlackSummary extends StatelessWidget {
           ),
           Obx(
             () => Text(
-              '${controller.slackData.value?.messages?.length ?? 0} messages',
+              '${controller.slackData.length} messages',
               style: const TextStyle(
                 color: AppColors.black,
                 fontSize: 14,
@@ -78,7 +80,7 @@ class SlackSummary extends StatelessWidget {
                   () => Wrap(
                     children: List.generate(senderList.length, (index) {
                       return Text(
-                        '#${senderList[index]?.channelName ?? ''}',
+                        '#${senderList[index]?.name ?? ''}  ',
                         style: TextStyle(
                           color: AppColors.black.withOpacity(0.56),
                           fontSize: 14,
@@ -119,9 +121,8 @@ class SlackSummary extends StatelessWidget {
           Obx(
             () => Expanded(
               child: Column(
-                children: List.generate(
-                    min(3, controller.slackData.value?.messages?.length ?? 0),
-                    (index) {
+                children:
+                    List.generate(min(3, controller.slackData.length), (index) {
                   return Column(
                     children: [
                       Container(
@@ -136,9 +137,7 @@ class SlackSummary extends StatelessWidget {
                             ),
                             color: Color(0XFFF0F0F0)),
                         child: Text(
-                          controller
-                                  .slackData.value?.messages?[index].summary ??
-                              '',
+                          controller.slackData[index].summary ?? '',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
@@ -200,21 +199,28 @@ class SlackSummary extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(8),
+              AnimatedTap(
+                onTap: () {
+                  eventBus.fire(ChatEvent(
+                      message:
+                          'Summarize all my slack communications received in the last 24 hrs.'));
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                    color: Color(0xFF695DF0),
                   ),
-                  color: Color(0xFF695DF0),
-                ),
-                height: 36,
-                padding: const EdgeInsets.all(8),
-                child: const Text(
-                  'View details',
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  height: 36,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text(
+                    'View details',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -226,10 +232,6 @@ class SlackSummary extends StatelessWidget {
   }
 
   List<Channel?> get senderList {
-    return controller.slackData.value?.messages
-            ?.map((e) => e.channel)
-            .toSet()
-            .toList() ??
-        [];
+    return controller.slackData.map((e) => e.channel).toSet().toList();
   }
 }
