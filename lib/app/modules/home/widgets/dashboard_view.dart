@@ -170,7 +170,9 @@ class DashboardView extends StatelessWidget {
           ),
           Row(
             children: [
-              const TaskChart(),
+              TaskChart(
+                controller: controller,
+              ),
               const SizedBox(
                 width: 14,
               ),
@@ -252,7 +254,9 @@ class DashboardView extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  const TaskChart(),
+                  TaskChart(
+                    controller: controller,
+                  ),
                   const SizedBox(
                     width: 14,
                   ),

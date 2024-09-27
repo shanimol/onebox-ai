@@ -173,7 +173,7 @@ class ExampleSidebarX extends StatelessWidget {
         ),
         SidebarXItem(
           icon: Icons.check_circle,
-          label: 'Action Items',
+          label: 'Top Priorities',
           onTap: () {
             debugPrint('Action Items - Last Week');
           },

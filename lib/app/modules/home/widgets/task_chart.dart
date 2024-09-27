@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/app/common/util/exports.dart';
+import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/gen/assets.gen.dart';
 import 'package:nexus/gen/fonts.gen.dart';
 
 class TaskChart extends StatelessWidget {
-  const TaskChart({super.key});
+  final HomeController controller;
+  const TaskChart({required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -85,8 +87,8 @@ class TaskChart extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
-                      text: const TextSpan(
-                          text: '12',
+                      text: TextSpan(
+                          text: '$totalMessageCount',
                           style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w600,
@@ -206,6 +208,11 @@ class TaskChart extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  int get totalMessageCount {
+    return (controller.emaildata.value?.emails?.length ?? 0) +
+        (controller.slackData.value?.messages?.length ?? 0);
   }
 }
 

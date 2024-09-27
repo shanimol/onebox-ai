@@ -48,7 +48,7 @@ class TaskCard extends StatelessWidget {
                     width: 12,
                   ),
                   const Text(
-                    "Action Items",
+                    "Top Priorities",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -151,7 +151,7 @@ class TaskCard extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'All Tasks',
+                            'All',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
