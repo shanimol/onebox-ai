@@ -33,7 +33,7 @@ class Calendar extends StatelessWidget {
                     decoration: const BoxDecoration(
                       border: Border(
                         bottom: BorderSide(
-                          color: Color(0xFFD72F59),
+                          color: Color(0xFF695DF0),
                           width: 4,
                         ),
                       ),
@@ -123,7 +123,7 @@ class Calendar extends StatelessWidget {
               vertical: 10,
             ),
             decoration: const BoxDecoration(
-              color: Color(0xFFD72F59),
+              color: Color(0xFF695DF0),
             ),
             width: double.infinity,
             child: const Text(

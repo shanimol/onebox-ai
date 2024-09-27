@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:nexus/app/common/event_bus/events.dart';
+import 'package:nexus/app/data/models/meeting.dart';
+import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
 import '../../../common/values/app_colors.dart';
 
 class Meetings extends StatefulWidget {
-  const Meetings({super.key});
+  final HomeController controller;
+  Meetings({required this.controller, super.key});
 
   @override
   State<Meetings> createState() => _MeetingsState();
@@ -20,9 +24,8 @@ class _MeetingsState extends State<Meetings> {
       //width: 470,
       height: 310,
       padding: const EdgeInsets.only(
-        top: 9,
-        left: 16,
-        right: 16,
+        left: 7,
+        right: 7,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(19),
@@ -38,25 +41,32 @@ class _MeetingsState extends State<Meetings> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Assets.images.gmeet.image(
-                height: 27,
-                width: 27,
-              ),
-              SizedBox(
-                width: 27,
-              ),
-              const Text(
-                'Meetings',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 9,
+              left: 9,
+              right: 9,
+            ),
+            child: Row(
+              children: [
+                Assets.images.gmeet.image(
+                  height: 27,
+                  width: 27,
                 ),
-              ),
-            ],
+                const SizedBox(
+                  width: 27,
+                ),
+                const Text(
+                  'Meetings',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 17),
           Expanded(child: upcomingMeetings()),
@@ -67,56 +77,120 @@ class _MeetingsState extends State<Meetings> {
 
   Widget upcomingMeetings() {
     return Container(
-      color: Color(0xFFFBFBFB),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'TODAY',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w500,
-                  height: 14 / 12,
+      padding: const EdgeInsets.all(12),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(9),
+        ),
+        color: Color(0xFFFBFBFB),
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'UPCOMING: ${upcomingMeetingsList.length}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    ),
+                    const Text(
+                      ' Sept 16, 2024',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              Text(
-                ' Sept 16, 2024',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w500,
-                  height: 14 / 12,
+                const SizedBox(height: 8),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return listItem(
+                      name: upcomingMeetingsList[index].title ?? '',
+                      time:
+                          '${formattedTime(upcomingMeetingsList[index].startTime)} - ${formattedTime(upcomingMeetingsList[index].endTime)}',
+                      index: index,
+                      buttonTitle: 'Prep me',
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 7),
+                  itemCount: upcomingMeetingsList.length,
                 ),
-              )
-            ],
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return listItem(
-                  name: 'Unilever & The Brand tech group',
-                  time: '4:00PM - 5:00PM',
-                  index: index,
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 7),
-              itemCount: 10, // Increase the itemCount for better scrolling test
+              ],
             ),
-          ),
-        ],
+            SizedBox(
+              height: 16,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'COMPLETED: ${completedMeetingsList.length}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    ),
+                    const Text(
+                      ' Sept 16, 2024',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w500,
+                        height: 14 / 12,
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 8),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return listItem(
+                        name: upcomingMeetingsList[index].title ?? '',
+                        time:
+                            '${formattedTime(completedMeetingsList[index].startTime)} - ${formattedTime(completedMeetingsList[index].endTime)}',
+                        index: index,
+                        buttonTitle: 'View insights');
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 7),
+                  itemCount: completedMeetingsList.length,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget listItem({String? name, String? time, required int index}) {
+  Widget listItem(
+      {String? name, String? time, required int index, String? buttonTitle}) {
     return AnimatedTap(
       onTap: () {
         setState(() {
@@ -128,14 +202,16 @@ class _MeetingsState extends State<Meetings> {
         decoration: BoxDecoration(
           border: index == selectedIndex
               ? Border.all(
-                  color: Color(0xFFD72F59),
+                  color: const Color(0xFF695DF0),
                   width: 2,
                 )
               : Border.all(
                   color: Colors.transparent,
                 ),
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: selectedIndex == index ? Color(0xFFFCF0F3) : Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          color: selectedIndex == index
+              ? const Color(0xFF695DF0).withOpacity(0.09)
+              : Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,7 +245,7 @@ class _MeetingsState extends State<Meetings> {
                             height: 16,
                             width: 16,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Text(
@@ -198,19 +274,24 @@ class _MeetingsState extends State<Meetings> {
                   horizontal: 10,
                   vertical: 6,
                 ),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(7),
                   ),
-                  color: Color(0xFF050505),
+                  border: Border.all(
+                    color: selectedIndex == index
+                        ? Colors.black.withOpacity(0.07)
+                        : Colors.transparent,
+                  ),
+                  color: Colors.white,
                 ),
-                child: const Text(
-                  'Prep Me',
+                child: Text(
+                  buttonTitle ?? '',
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                    color: Color(0XFF181818),
                   ),
                 ),
               ),
@@ -220,4 +301,16 @@ class _MeetingsState extends State<Meetings> {
       ),
     );
   }
+
+  List<Meeting> get upcomingMeetingsList => widget.controller.meetingsList
+      .where((e) => (e.startTime ?? DateTime.now()).isAfter(DateTime.now()))
+      .toList();
+
+  String formattedTime(DateTime? date) {
+    return DateFormat('ha').format(date ?? DateTime.now()).toLowerCase(); // C
+  }
+
+  List<Meeting> get completedMeetingsList => widget.controller.meetingsList
+      .where((e) => (e.startTime ?? DateTime.now()).isBefore(DateTime.now()))
+      .toList();
 }

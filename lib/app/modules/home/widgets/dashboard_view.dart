@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
+import 'package:nexus/app/modules/home/widgets/gmail_summary.dart';
 import 'package:nexus/app/modules/home/widgets/meetings.dart';
-import 'package:nexus/app/modules/home/widgets/summary.dart';
+import 'package:nexus/app/modules/home/widgets/slack_summary.dart';
 import 'package:nexus/app/modules/home/widgets/task_card.dart';
 import 'package:nexus/app/modules/home/widgets/task_chart.dart';
 
@@ -59,7 +60,9 @@ class DashboardView extends StatelessWidget {
                             width: 20,
                           ),
                           Expanded(
-                            child: Meetings(),
+                            child: Meetings(
+                              controller: controller,
+                            ),
                           ),
                         ],
                       ),
@@ -94,17 +97,21 @@ class DashboardView extends StatelessWidget {
           Radius.circular(22),
         ),
       ),
-      child: const Row(
+      child: Row(
         children: [
           TaskChart(),
           SizedBox(
             width: 14,
           ),
-          Summary(),
+          GmailSummary(
+            controller: controller,
+          ),
           SizedBox(
             width: 14,
           ),
-          Summary(),
+          SlackSummary(
+            controller: controller,
+          ),
         ],
       ),
     );
