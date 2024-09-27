@@ -3,7 +3,7 @@ import 'user.dart';
 
 class Meeting implements JsonParsableClass {
   String? id;
-  String? title;
+  String? name;
   String? description;
   String? summary;
   DateTime? startTime;
@@ -12,7 +12,7 @@ class Meeting implements JsonParsableClass {
 
   Meeting({
     this.id,
-    this.title,
+    this.name,
     this.description,
     this.summary,
     this.startTime,
@@ -23,7 +23,7 @@ class Meeting implements JsonParsableClass {
   factory Meeting.fromMap(Map<String, dynamic> map) {
     return Meeting(
       id: map['id'],
-      title: map['title'],
+      name: map['name'],
       description: map['description'],
       summary: map['summary'],
       startTime: map['start_time'] != null ? DateTime.parse(map['start_time']) : null,
@@ -35,7 +35,7 @@ class Meeting implements JsonParsableClass {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'title': title,
+      'name': name,
       'description': description,
       'summary': summary,
       'start_time': startTime?.toIso8601String(),
@@ -50,7 +50,7 @@ class Meeting implements JsonParsableClass {
 
     return other is Meeting &&
         other.id == id &&
-        other.title == title &&
+        other.name == name &&
         other.description == description &&
         other.summary == summary &&
         other.startTime == startTime &&
@@ -61,7 +61,7 @@ class Meeting implements JsonParsableClass {
   @override
   int get hashCode {
     return id.hashCode ^
-        title.hashCode ^
+        name.hashCode ^
         description.hashCode ^
         summary.hashCode ^
         startTime.hashCode ^

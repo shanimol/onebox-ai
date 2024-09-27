@@ -120,7 +120,7 @@ class _MeetingsState extends State<Meetings> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return listItem(
-                        name: upcomingMeetingsList[index].title ?? '',
+                        name: upcomingMeetingsList[index].name ?? '',
                         time:
                             '${formattedTime(upcomingMeetingsList[index].startTime)} - ${formattedTime(upcomingMeetingsList[index].endTime)}',
                         index: index,
@@ -168,7 +168,7 @@ class _MeetingsState extends State<Meetings> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return listItem(
-                          name: completedMeetingsList[index].title ?? '',
+                          name: completedMeetingsList[index].name ?? '',
                           time:
                               '${formattedTime(completedMeetingsList[index].startTime)} - ${formattedTime(completedMeetingsList[index].endTime)}',
                           index: index,

@@ -179,7 +179,7 @@ class Calendar extends StatelessWidget {
                                               ),
                                               Text(
                                                 controller.calendarTask[index]
-                                                        .task?.title ??
+                                                        .task?.content ??
                                                     '',
                                                 style: const TextStyle(
                                                   fontSize: 14,
@@ -264,7 +264,7 @@ class Calendar extends StatelessWidget {
                                                 height: 20,
                                               ),
                                               Text(
-                                                candidateData[0]?.title ?? '',
+                                                candidateData[0]?.content ?? '',
                                                 style: const TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500,

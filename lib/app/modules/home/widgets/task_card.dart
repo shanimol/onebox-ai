@@ -230,8 +230,8 @@ class TaskCard extends StatelessWidget {
                           ),
                           feedback: Material(
                             child: DraggingActionItem(
-                              title: task.title,
-                              summary: task.summary,
+                              title: task.content,
+                              summary: task.content,
                               actionId: task.id,
                               source: task.sourceType,
                             ),

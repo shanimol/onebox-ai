@@ -18,8 +18,8 @@ class DraggingActionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 425,
-      height: 77,
+      width: 475,
+      height: 95,
       padding: const EdgeInsets.symmetric(
         horizontal: 8,
         vertical: 9,

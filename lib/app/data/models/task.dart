@@ -9,7 +9,7 @@ enum Source { Slack, Gmail, Meet }
 
 class Task implements JsonParsableClass {
   String? id;
-  String? title;
+  String? content;
   String? summary;
   User? assigner;
   DateTime? date;
@@ -20,7 +20,7 @@ class Task implements JsonParsableClass {
 
   Task({
     this.id,
-    this.title,
+    this.content,
     this.summary,
     this.assigner,
     this.date,
@@ -33,7 +33,7 @@ class Task implements JsonParsableClass {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'title': title,
+      'content': content,
       'summary': summary,
       'assigner': assigner?.toMap(),
       'date': date?.toIso8601String(),
@@ -47,7 +47,7 @@ class Task implements JsonParsableClass {
   factory Task.fromMap(Map<String, dynamic> json) {
     return Task(
       id: json['id'],
-      title: json['title'],
+      content: json['content'],
       summary: json['summary'],
       assigner:
           json['assigner'] != null ? User.fromMap(json['assigner']) : null,

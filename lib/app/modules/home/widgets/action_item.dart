@@ -45,7 +45,7 @@ class ActionItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    task?.title ?? '',
+                    task?.content ?? '',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -56,7 +56,7 @@ class ActionItem extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    task?.summary ?? '',
+                    task?.content ?? '',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -233,6 +233,7 @@ class ActionItem extends StatelessWidget {
           ),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
@@ -294,7 +295,7 @@ class ActionItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        task?.title ?? '',
+                        task?.content ?? '',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -389,7 +390,7 @@ class ActionItem extends StatelessWidget {
               height: 6,
             ),
             Text(
-              task?.summary ?? '',
+              task?.content ?? '',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
