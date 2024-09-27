@@ -40,8 +40,8 @@ class ExampleSidebarXForIntegrations extends StatelessWidget {
           border: Border.all(
             color: Colors.grey.withOpacity(0.37),
           ),
-          gradient: const LinearGradient(
-            colors: [AppColors.grey33, Colors.grey],
+          gradient: LinearGradient(
+            colors: [Color(0xFF695DF0), Color(0xFF695DF0).withOpacity(.2)],
           ),
           boxShadow: [
             BoxShadow(

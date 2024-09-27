@@ -81,28 +81,29 @@ class _ChatPageState extends State<ChatPage>
           drawer: ExampleSidebarX(controller: _controller),
           body: Row(
             children: [
-              if (widget.shouldShowList)
-                ExampleSidebarX(controller: _controller),
+              // if (widget.shouldShowList)
+              //   ExampleSidebarX(controller: _controller),
               Expanded(
-                child: Center(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Chat(
-                  messages: _messages,
-                  onSendPressed: _handleSendPressed,
-                  user: _user1,
-                  theme: DefaultChatTheme(
-                      backgroundColor: Color(0xFFFAFAFA),
-                      sendButtonIcon: SendIconWidget(),
-                      inputPadding: const EdgeInsets.all(10),
-                      inputTextColor: AppColors.black,
-                      inputContainerDecoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          color: AppColors.black11.withOpacity(.2),
-                        ),
-                      ),
-                      inputBackgroundColor: AppColors.white),
-                )
+                      messages: _messages,
+                      onSendPressed: _handleSendPressed,
+                      user: _user1,
+                      theme: DefaultChatTheme(
+                          backgroundColor: Color(0xFFFAFAFA),
+                          sendButtonIcon: SendIconWidget(),
+                          inputPadding: const EdgeInsets.all(10),
+                          inputTextColor: AppColors.black,
+                          inputContainerDecoration: BoxDecoration(
+                            color: AppColors.white,
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                              color: AppColors.black11.withOpacity(.2),
+                            ),
+                          ),
+                          inputBackgroundColor: AppColors.white),
+                    )
                     // ScreensExample(
                     //   controller: _controller,
                     // ),
