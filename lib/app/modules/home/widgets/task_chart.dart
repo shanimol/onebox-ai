@@ -41,7 +41,7 @@ class TaskChart extends StatelessWidget {
         height: 20,
         width: 20,
       ),
-      Assets.images.logo4.image(
+      Assets.images.logo5.image(
         height: 20,
         width: 20,
       ),

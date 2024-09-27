@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/app/modules/home/widgets/calendar.dart';
@@ -30,27 +31,69 @@ class DashboardView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(25),
                   child: SingleChildScrollView(
+                    
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Hi Shanimol,',
-                          style: TextStyle(
-                            fontSize: 34,
-                            color: AppColors.black,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          'Here is an overview on what’s on your work plate today.',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.black.withOpacity(0.56),
-                            fontWeight: FontWeight.w500,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Hi Sharbel,',
+                                  style: TextStyle(
+                                    fontSize: 34,
+                                    color: AppColors.black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 7,
+                                ),
+                                Text(
+                                  'Here is an overview on what’s on your work plate today.',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: AppColors.black.withOpacity(0.56),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(7),
+                                ),
+                                color: Color(0xFFEDECFA),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 8,
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Today, ${DateFormat("MMM dd, yyyy").format(DateTime.now())}',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF1D1C2E),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 12,
+                                  ),
+                                  Assets.images.calendarHome.image(
+                                    height: 21,
+                                    width: 21,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         ),
                         const SizedBox(
                           height: 24,
@@ -161,7 +204,7 @@ class DashboardView extends StatelessWidget {
                       Row(
                         children: [
                           const Text(
-                            'Hi Shanimol,',
+                            'Hi Sharbel,',
                             style: TextStyle(
                               fontSize: 34,
                               color: AppColors.black,
