@@ -8,6 +8,7 @@ import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 import '../../../../gen/assets.gen.dart';
+import '../../../common/values/app_colors.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/chat/chat.dart';
 import '../widgets/integrations/integrations.dart';
@@ -206,10 +207,13 @@ class HomeView extends GetView<HomeController> {
           controller: controller,
         );
       case 1:
-        return Directionality(
-          textDirection: TextDirection.ltr,
-          child: ChatPage(
-            controller: controller,
+        return Padding(
+          padding: EdgeInsets.only(bottom: 24),
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: ChatPage(
+              controller: controller,
+            ),
           ),
         );
       case 2:

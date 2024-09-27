@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/data/models/slack.dart';
 import 'package:nexus/app/data/models/user.dart';
@@ -45,12 +48,14 @@ class SlackSummary extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          Text(
-            '${controller.slackList.length} messages',
-            style: const TextStyle(
-              color: AppColors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
+          Obx(
+            () => Text(
+              '${controller.slackData.value?.messages?.length ?? 0} messages',
+              style: const TextStyle(
+                color: AppColors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           const SizedBox(
@@ -68,17 +73,19 @@ class SlackSummary extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Wrap(
-                  children: List.generate(senderList.length, (index) {
-                    return Text(
-                      '#${senderList[index]?.channelName} ',
-                      style: TextStyle(
-                        color: AppColors.black.withOpacity(0.56),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    );
-                  }),
+                child: Obx(
+                  () => Wrap(
+                    children: List.generate(senderList.length, (index) {
+                      return Text(
+                        '#${senderList[index]?.channelName ?? ''}',
+                        style: TextStyle(
+                          color: AppColors.black.withOpacity(0.56),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    }),
+                  ),
                 ),
               )
             ],
@@ -108,38 +115,43 @@ class SlackSummary extends StatelessWidget {
           const SizedBox(
             height: 6,
           ),
-          Column(
-            children: List.generate(3, (index) {
-              return Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 10,
-                    ),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(9),
+          Obx(
+            () => Column(
+              children: List.generate(
+                  min(3, controller.slackData.value?.messages?.length ?? 0),
+                  (index) {
+                return Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 10,
+                      ),
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(9),
+                          ),
+                          color: Color(0XFFF0F0F0)),
+                      child: Text(
+                        controller.slackData.value?.messages?[index].summary ??
+                            '',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: AppColors.black.withOpacity(0.8),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
-                        color: Color(0XFFF0F0F0)),
-                    child: Text(
-                      controller.slackList[index].summary ?? '',
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: AppColors.black.withOpacity(0.8),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  )
-                ],
-              );
-            }),
+                    const SizedBox(
+                      height: 6,
+                    )
+                  ],
+                );
+              }),
+            ),
           ),
           const SizedBox(
             height: 16,
@@ -210,6 +222,10 @@ class SlackSummary extends StatelessWidget {
   }
 
   List<Channel?> get senderList {
-    return controller.slackList.map((e) => e.channel).toSet().toList();
+    return controller.slackData.value?.messages
+            ?.map((e) => e.channel)
+            .toSet()
+            .toList() ??
+        [];
   }
 }

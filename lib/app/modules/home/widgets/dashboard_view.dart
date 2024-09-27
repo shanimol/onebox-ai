@@ -12,6 +12,7 @@ import 'package:nexus/app/modules/home/widgets/task_chart.dart';
 import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
+import '../../../../gen/fonts.gen.dart';
 import 'dashboard_right_drawer.dart';
 
 class DashboardView extends StatelessWidget {

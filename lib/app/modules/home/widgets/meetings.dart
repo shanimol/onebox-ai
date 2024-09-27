@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nexus/app/common/event_bus/events.dart';
 import 'package:nexus/app/data/models/meeting.dart';
@@ -84,102 +85,104 @@ class _MeetingsState extends State<Meetings> {
         color: Color(0xFFFBFBFB),
       ),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'UPCOMING: ${upcomingMeetingsList.length}',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        height: 14 / 12,
+        child: Obx(() {
+          return Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'UPCOMING: ${upcomingMeetingsList.length}',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          height: 14 / 12,
+                        ),
                       ),
-                    ),
-                    const Text(
-                      ' Sept 16, 2024',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        height: 14 / 12,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 8),
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return listItem(
-                      name: upcomingMeetingsList[index].title ?? '',
-                      time:
-                          '${formattedTime(upcomingMeetingsList[index].startTime)} - ${formattedTime(upcomingMeetingsList[index].endTime)}',
-                      index: index,
-                      buttonTitle: 'Prep me',
-                    );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 7),
-                  itemCount: upcomingMeetingsList.length,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'COMPLETED: ${completedMeetingsList.length}',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        height: 14 / 12,
-                      ),
-                    ),
-                    const Text(
-                      ' Sept 16, 2024',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        height: 14 / 12,
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 8),
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return listItem(
+                      Text(
+                        DateFormat("MMM dd, yyyy").format(DateTime.now()),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          height: 14 / 12,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return listItem(
                         name: upcomingMeetingsList[index].title ?? '',
                         time:
-                            '${formattedTime(completedMeetingsList[index].startTime)} - ${formattedTime(completedMeetingsList[index].endTime)}',
+                            '${formattedTime(upcomingMeetingsList[index].startTime)} - ${formattedTime(upcomingMeetingsList[index].endTime)}',
                         index: index,
-                        buttonTitle: 'View insights');
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 7),
-                  itemCount: completedMeetingsList.length,
-                ),
-              ],
-            ),
-          ],
-        ),
+                        buttonTitle: 'Prep me',
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 7),
+                    itemCount: upcomingMeetingsList.length,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'COMPLETED: ${completedMeetingsList.length}',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          height: 14 / 12,
+                        ),
+                      ),
+                      Text(
+                        DateFormat("MMM dd, yyyy").format(DateTime.now()),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          height: 14 / 12,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return listItem(
+                          name: completedMeetingsList[index].title ?? '',
+                          time:
+                              '${formattedTime(completedMeetingsList[index].startTime)} - ${formattedTime(completedMeetingsList[index].endTime)}',
+                          index: index,
+                          buttonTitle: 'View insights');
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 7),
+                    itemCount: completedMeetingsList.length,
+                  ),
+                ],
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
@@ -261,7 +264,7 @@ class _MeetingsState extends State<Meetings> {
             AnimatedTap(
               onTap: () {
                 eventBus.fire(ChatEvent(
-                    message: 'Prepare me for tomorrow\'s meeting with joy'));
+                    message: 'Prepare me for tomorrow\'s meeting with James'));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(
@@ -295,7 +298,7 @@ class _MeetingsState extends State<Meetings> {
     );
   }
 
-  List<Meeting> get upcomingMeetingsList => widget.controller.meetingsList
+  List<Meeting> get upcomingMeetingsList => widget.controller.meetings
       .where((e) => (e.startTime ?? DateTime.now()).isAfter(DateTime.now()))
       .toList();
 
@@ -303,7 +306,7 @@ class _MeetingsState extends State<Meetings> {
     return DateFormat('ha').format(date ?? DateTime.now()).toUpperCase(); // C
   }
 
-  List<Meeting> get completedMeetingsList => widget.controller.meetingsList
+  List<Meeting> get completedMeetingsList => widget.controller.meetings
       .where((e) => (e.startTime ?? DateTime.now()).isBefore(DateTime.now()))
       .toList();
 }

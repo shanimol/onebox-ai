@@ -48,7 +48,7 @@ class TaskCard extends StatelessWidget {
                     width: 12,
                   ),
                   const Text(
-                    "Tasks",
+                    "Action Items",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
