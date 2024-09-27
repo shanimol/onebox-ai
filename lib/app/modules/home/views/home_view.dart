@@ -84,8 +84,15 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ],
                       theme: SidebarXTheme(
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: Colors.white,
+                          border: Border(
+                            right: BorderSide(
+                              color: Colors.black.withOpacity(
+                                0.1,
+                              ),
+                            ),
+                          ),
                         ),
                         selectedItemDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),

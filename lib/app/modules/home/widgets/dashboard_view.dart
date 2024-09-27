@@ -98,6 +98,7 @@ class DashboardView extends StatelessWidget {
 
   Widget updates() {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: const BoxDecoration(
         color: AppColors.white,
