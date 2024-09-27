@@ -1,14 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nexus/app/common/util/exports.dart';
 import 'package:nexus/app/modules/home/widgets/dashboard_view.dart';
-import 'package:nexus/app/modules/home/widgets/meetings.dart';
-import 'package:nexus/app/modules/home/widgets/platform_updates.dart';
-import 'package:nexus/app/routes/app_pages.dart';
-import 'package:sidebarx/sidebarx.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../controllers/home_controller.dart';
+import 'package:nexus/app/common/util/exports.dart';
+import 'package:sidebarx/sidebarx.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
@@ -18,7 +16,7 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         backgroundColor: AppColors.white,
         leading: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 16,
             top: 8,
             bottom: 8,
@@ -28,7 +26,7 @@ class HomeView extends GetView<HomeController> {
             width: 40,
           ),
         ),
-        title: Text(
+        title: const Text(
           'OneBox.ai',
           style: TextStyle(
             fontSize: 20,
@@ -51,7 +49,7 @@ class HomeView extends GetView<HomeController> {
                   //top: 29,
                   bottom: 29,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 hoverColor: Colors.amberAccent,
@@ -112,7 +110,7 @@ class HomeView extends GetView<HomeController> {
             ),
             Expanded(
               child: Container(
-                  color: Color(0xFFFBFBFB),
+                  color: const Color(0xFFFBFBFB),
                   child: _getPageContent(controller.selectedNavbarIndex.value)),
             )
           ],
@@ -124,23 +122,25 @@ class HomeView extends GetView<HomeController> {
   Widget _getPageContent(int index) {
     switch (index) {
       case 0:
-        return DashboardView();
+        return DashboardView(
+          controller: controller,
+        );
       case 1:
-        return Center(
+        return const Center(
           child: Text('Chat'),
         );
       case 2:
-        return Center(
+        return const Center(
           child: Text('section 3'),
         );
       case 3:
-        return Center(
+        return const Center(
           child: Text('section 4'),
         );
       // Display DashboardView when first item is selected
 
       default:
-        return const Center(child: DashboardView()); // Fallback view
+        return  Center(child: DashboardView(controller: controller,)); // Fallback view
     }
   }
 }

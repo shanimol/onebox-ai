@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nexus/app/data/models/task.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
 class ActionItem extends StatefulWidget {
-  final String title;
-  final String summary;
-  final String actionId;
-  final NexusActionSource source;
+  final String? title;
+  final String? summary;
+  final String? actionId;
+  final Source? source;
 
   const ActionItem({
     super.key,
@@ -52,7 +53,7 @@ class _ActionItemState extends State<ActionItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.title,
+                    widget.title ?? '',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -60,13 +61,14 @@ class _ActionItemState extends State<ActionItem> {
                     ),
                   ),
                   Text(
-                    widget.summary,
+                    widget.summary ?? '',
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
                       height: 17.07 / 14,
                     ),
+                    maxLines: 2,
                   ),
                 ],
               ),
@@ -120,23 +122,18 @@ class _ActionItemState extends State<ActionItem> {
 
   Widget _buildSourceIcon() {
     switch (widget.source) {
-      case NexusActionSource.slack:
+      case Source.Slack:
         return Assets.images.slack.image(
           height: 37,
           width: 37,
         );
-      case NexusActionSource.gmail:
+      case Source.Gmail:
         return Assets.images.gmail.image(
           height: 37,
           width: 37,
         );
-      case NexusActionSource.figma:
-        return Assets.images.figma.image(
-          height: 37,
-          width: 37,
-        );
-      case NexusActionSource.confluence:
-        return Assets.images.confluence.image(
+      case Source.Meet:
+        return Assets.images.meet.image(
           height: 37,
           width: 37,
         );
@@ -171,11 +168,4 @@ class _ActionItemState extends State<ActionItem> {
       ),
     );
   }
-}
-
-enum NexusActionSource {
-  slack,
-  gmail,
-  figma,
-  confluence,
 }
