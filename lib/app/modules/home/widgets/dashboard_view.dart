@@ -120,25 +120,26 @@ class DashboardView extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                const TaskChart(),
-                const SizedBox(
-                  width: 14,
-                ),
-                GmailSummary(
+          Row(
+            children: [
+              const TaskChart(),
+              const SizedBox(
+                width: 14,
+              ),
+              Expanded(
+                child: GmailSummary(
                   controller: controller,
                 ),
-                const SizedBox(
-                  width: 14,
-                ),
-                SlackSummary(
+              ),
+              const SizedBox(
+                width: 14,
+              ),
+              Expanded(
+                child: SlackSummary(
                   controller: controller,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

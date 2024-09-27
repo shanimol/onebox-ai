@@ -16,7 +16,8 @@ class GmailSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width <= 800 ? double.infinity : 340,
+      height: 350,
+      //width: MediaQuery.of(context).size.width <= 800 ? double.infinity : 340,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Color(0xFFFBFBFB),
@@ -122,41 +123,43 @@ class GmailSummary extends StatelessWidget {
             height: 6,
           ),
           Obx(
-            () => Column(
-              children: List.generate(
-                  min(3, controller.emaildata.value?.emails?.length ?? 0),
-                  (index) {
-                return Column(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 10,
-                      ),
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(9),
+            () => Expanded(
+              child: Column(
+                children: List.generate(
+                    min(3, controller.emaildata.value?.emails?.length ?? 0),
+                    (index) {
+                  return Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 10,
+                        ),
+                        decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(9),
+                            ),
+                            color: Color(0XFFF0F0F0)),
+                        child: Text(
+                          controller.emaildata.value?.emails?[index].summary ??
+                              '',
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: AppColors.black.withOpacity(0.8),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
-                          color: Color(0XFFF0F0F0)),
-                      child: Text(
-                        controller.emaildata.value?.emails?[index].summary ??
-                            '',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: AppColors.black.withOpacity(0.8),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    )
-                  ],
-                );
-              }),
+                      const SizedBox(
+                        height: 6,
+                      )
+                    ],
+                  );
+                }),
+              ),
             ),
           ),
           const SizedBox(
