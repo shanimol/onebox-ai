@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
-import 'package:nexus/app/modules/home/widgets/action_item.dart';
 import 'package:nexus/app/modules/home/widgets/calendar.dart';
-import 'package:nexus/app/modules/home/widgets/meeting_count.dart';
 import 'package:nexus/app/modules/home/widgets/meetings.dart';
-import 'package:nexus/app/modules/home/widgets/messages_count.dart';
 import 'package:nexus/app/modules/home/widgets/summary.dart';
 import 'package:nexus/app/modules/home/widgets/task_card.dart';
 import 'package:nexus/app/modules/home/widgets/task_chart.dart';
