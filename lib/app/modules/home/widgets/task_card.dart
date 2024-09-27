@@ -210,10 +210,7 @@ class TaskCard extends StatelessWidget {
                         return Draggable<Task>(
                           data: task,
                           childWhenDragging: ActionItem(
-                            title: task.title,
-                            summary: task.summary,
-                            actionId: task.id,
-                            source: task.sourceType,
+                            task: task,
                           ),
                           feedback: Material(
                             child: DraggingActionItem(
@@ -224,10 +221,7 @@ class TaskCard extends StatelessWidget {
                             ),
                           ),
                           child: ActionItem(
-                            title: task.title,
-                            summary: task.summary,
-                            actionId: task.id,
-                            source: task.sourceType,
+                            task: task,
                           ),
                         );
                       },

@@ -36,6 +36,10 @@ class $AssetsImagesGen {
   AssetGenImage get calendarHomeSuffix =>
       const AssetGenImage('assets/images/calendar_home_suffix.png');
 
+  /// File path: assets/images/calendar_icon_action_items_dialog.png
+  AssetGenImage get calendarIconActionItemsDialog => const AssetGenImage(
+      'assets/images/calendar_icon_action_items_dialog.png');
+
   /// File path: assets/images/clock.png
   AssetGenImage get clock => const AssetGenImage('assets/images/clock.png');
 
@@ -159,6 +163,7 @@ class $AssetsImagesGen {
         assign,
         calendarHome,
         calendarHomeSuffix,
+        calendarIconActionItemsDialog,
         clock,
         confluence,
         delete,
