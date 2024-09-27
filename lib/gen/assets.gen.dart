@@ -25,6 +25,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/assign.png
   AssetGenImage get assign => const AssetGenImage('assets/images/assign.png');
 
+  /// File path: assets/images/confluence.png
+  AssetGenImage get confluence =>
+      const AssetGenImage('assets/images/confluence.png');
+
   /// File path: assets/images/delete.png
   AssetGenImage get delete => const AssetGenImage('assets/images/delete.png');
 
@@ -33,6 +37,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/expand.png
   AssetGenImage get expand => const AssetGenImage('assets/images/expand.png');
+
+  /// File path: assets/images/figma.png
+  AssetGenImage get figma => const AssetGenImage('assets/images/figma.png');
 
   /// File path: assets/images/filter.png
   AssetGenImage get filter => const AssetGenImage('assets/images/filter.png');
@@ -46,19 +53,33 @@ class $AssetsImagesGen {
   /// File path: assets/images/send.png
   AssetGenImage get send => const AssetGenImage('assets/images/send.png');
 
+  /// File path: assets/images/slack.png
+  AssetGenImage get slack => const AssetGenImage('assets/images/slack.png');
+
+  /// File path: assets/images/task.png
+  AssetGenImage get task => const AssetGenImage('assets/images/task.png');
+
+  /// File path: assets/images/tick.png
+  AssetGenImage get tick => const AssetGenImage('assets/images/tick.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         ai,
         actionItems,
         add,
         assign,
+        confluence,
         delete,
         excel,
         expand,
+        figma,
         filter,
         gmail,
         search,
-        send
+        send,
+        slack,
+        task,
+        tick
       ];
 }
 

@@ -27,8 +27,8 @@ class DashboardPage extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         title: const Text("Prodigy", style: TextStyle(color: Colors.black)),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Icon(Icons.search, color: Colors.black),
           ),
           _buildDropDown('Source'),
@@ -55,12 +55,13 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
           // Right Chat Space
-          Expanded(
-              flex: 6,
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: ChatPage(),
-              ))
+          const Expanded(
+            flex: 6,
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: ChatPage(),
+            ),
+          )
         ],
       ),
     );
@@ -70,12 +71,12 @@ class DashboardPage extends StatelessWidget {
     return DropdownButton<String>(
       value: title,
       icon: const Icon(Icons.arrow_downward, color: Colors.black),
-      underline: SizedBox(),
+      underline: const SizedBox(),
       onChanged: (String? newValue) {},
       items: <String>[title].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value, style: TextStyle(color: Colors.black)),
+          child: Text(value, style: const TextStyle(color: Colors.black)),
         );
       }).toList(),
     );
@@ -97,7 +98,7 @@ class DashboardPage extends StatelessWidget {
 
   Widget _buildPriorityCard(String number, String label) {
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       width: 100,
       decoration: BoxDecoration(
         color: Colors.grey[300],
@@ -106,7 +107,8 @@ class DashboardPage extends StatelessWidget {
       child: Column(
         children: [
           Text(number,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              style:
+                  const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           Text(label),
         ],
       ),
@@ -120,167 +122,87 @@ class DashboardPage extends StatelessWidget {
         child: Card(
           color: Colors.white,
           elevation: 0.3,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 9,
-              horizontal: 16,
-            ),
-            child: Column(
-              children: [
-                Row(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 9,
+                  horizontal: 16,
+                ),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Assets.images.actionItems.image(
-                      height: 14.61,
-                      width: 14.61,
+                    Assets.images.task.image(
+                      height: 27,
+                      width: 27,
                     ),
-                    SizedBox(
-                      width: 6.5,
+                    const SizedBox(
+                      width: 12,
                     ),
-                    Text(
-                      "Action Items",
+                    const Text(
+                      "Tasks",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         height: 19.5 / 16,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Container(
-                      padding: EdgeInsets.all(
-                        10,
+                      height: 33,
+                      width: 33,
+                      padding: const EdgeInsets.all(
+                        8,
                       ),
                       decoration: BoxDecoration(
-                        color: Color(0xFFCECECE),
-                        borderRadius: BorderRadius.circular(
-                          9,
+                        border: Border.all(
+                          color: const Color(0xFFF0F0F0),
                         ),
+                        borderRadius: BorderRadius.circular(9),
                       ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Critical Tasks",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              height: 19.5 / 16,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(
-                                999,
-                              ),
-                            ),
-                            child: Text(
-                              "6",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 19.5 / 16,
-                              ),
-                            ),
-                          ),
-                        ],
+                      child: Assets.images.expand.image(
+                        height: 16,
+                        width: 16,
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(
-                        10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEFEFEF),
-                        borderRadius: BorderRadius.circular(
-                          9,
-                        ),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(
-                            "All Tasks",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              height: 19.5 / 16,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(
-                                999,
-                              ),
-                            ),
-                            child: Text(
-                              "20",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                height: 19.5 / 16,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    Assets.images.filter.image(
-                      height: 32,
-                      width: 35,
-                    ),
-                    SizedBox(
-                      width: 7.72,
-                    ),
-                    Assets.images.add.image(
-                      height: 32,
-                      width: 35,
-                    ),
-                    SizedBox(
-                      width: 17.69,
-                    ),
-                    Assets.images.expand.image(
-                      width: 19,
-                      height: 19,
-                    )
                   ],
                 ),
-                SizedBox(
-                  height: 16.5,
-                ),
-                Expanded(
+              ),
+              const SizedBox(
+                height: 11,
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFFBFBFB),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(19),
+                      topRight: Radius.circular(19),
+                    ),
+                  ),
                   child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
                     itemBuilder: (context, index) {
-                      return ActionItem(
+                      return const ActionItem(
                         title:
                             "Collaborate with Unilever team and update the excel sheet",
-                        action: NexusAction.hackathon,
                         summary:
                             "Lorem ipsum dolor sit amet consectetur. Malesuada sem vestibulum mi in amet amet libero eget. Sociis aliquam sed id diam non quam purus morbi. Id at gravida aliquet a metus duis eget tincidunt diam. Sit nunc nisl pulvinar sit proin diam massa. Cursus dictum ut tristique integer. Sed id orci tempus a. Et risus blandit dolor rutrum.",
                         actionId: "1",
-                        source: NexusActionSource.excel,
+                        source: NexusActionSource.slack,
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return SizedBox(height: 8);
+                      return const SizedBox(height: 7);
                     },
                     itemCount: 3,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -288,7 +210,7 @@ class DashboardPage extends StatelessWidget {
   }
 
   Widget _buildActionItemDetails() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Summary:"),
@@ -306,7 +228,7 @@ class DashboardPage extends StatelessWidget {
       title: Text(taskName),
       trailing: ElevatedButton(
         onPressed: () {},
-        child: Text("Mark as done"),
+        child: const Text("Mark as done"),
       ),
     );
   }
@@ -317,7 +239,7 @@ class DashboardPage extends StatelessWidget {
       child: Row(
         children: [
           _buildMeetingCard(),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           _buildUpdatesCard(),
         ],
       ),
@@ -330,15 +252,15 @@ class DashboardPage extends StatelessWidget {
         elevation: 4,
         child: Column(
           children: [
-            ListTile(
+            const ListTile(
               title: Text("Today's meetings"),
               trailing: Icon(Icons.arrow_forward),
             ),
             ListTile(
-              title: Text("Unilever & The Brand tech group"),
-              subtitle: Text("4:00PM - 5:00PM"),
-              trailing:
-                  ElevatedButton(onPressed: () {}, child: Text("PREP ME")),
+              title: const Text("Unilever & The Brand tech group"),
+              subtitle: const Text("4:00PM - 5:00PM"),
+              trailing: ElevatedButton(
+                  onPressed: () {}, child: const Text("PREP ME")),
             ),
           ],
         ),
@@ -352,15 +274,15 @@ class DashboardPage extends StatelessWidget {
         elevation: 4,
         child: Column(
           children: [
-            ListTile(
+            const ListTile(
               title: Text("What's been happening"),
               subtitle: Text("September 24, 2024"),
             ),
             ListTile(
-              title: Text("5 emails from @dev"),
-              subtitle: Text("Lorem ipsum dolor sit amet."),
-              trailing:
-                  ElevatedButton(onPressed: () {}, child: Text("Summarize")),
+              title: const Text("5 emails from @dev"),
+              subtitle: const Text("Lorem ipsum dolor sit amet."),
+              trailing: ElevatedButton(
+                  onPressed: () {}, child: const Text("Summarize")),
             ),
           ],
         ),
@@ -374,12 +296,12 @@ class DashboardPage extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(16),
-            child: Text("Chat space", style: TextStyle(fontSize: 16)),
+            padding: const EdgeInsets.all(16),
+            child: const Text("Chat space", style: TextStyle(fontSize: 16)),
           ),
           Expanded(
             child: ListView(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               children: [
                 _buildSenderMessage("Prep me for Unilever meeting", "11:30 AM"),
                 _buildReceiverMessage(
@@ -399,18 +321,18 @@ class DashboardPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text('You', style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 5),
+          const Text('You', style: TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 5),
           Container(
-            padding: EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Text(message),
           ),
-          SizedBox(height: 5),
-          Text(time, style: TextStyle(color: Colors.grey, fontSize: 12)),
+          const SizedBox(height: 5),
+          Text(time, style: const TextStyle(color: Colors.grey, fontSize: 12)),
         ],
       ),
     );
@@ -422,18 +344,18 @@ class DashboardPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Prodigy', style: TextStyle(fontWeight: FontWeight.bold)),
-          SizedBox(height: 5),
+          const Text('Prodigy', style: TextStyle(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 5),
           Container(
-            padding: EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
               color: Colors.grey[300],
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Text(message),
           ),
-          SizedBox(height: 5),
-          Text(time, style: TextStyle(color: Colors.grey, fontSize: 12)),
+          const SizedBox(height: 5),
+          Text(time, style: const TextStyle(color: Colors.grey, fontSize: 12)),
         ],
       ),
     );
@@ -447,9 +369,9 @@ class DashboardPage extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: Colors.grey[300],
-            child: Icon(Icons.person, color: Colors.white),
+            child: const Icon(Icons.person, color: Colors.white),
           ),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               decoration: InputDecoration(
@@ -464,7 +386,7 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
             onPressed: () {
               // Send message functionality
             },
@@ -486,7 +408,7 @@ class MobileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Mobile View'));
+    return const Center(child: Text('Mobile View'));
   }
 }
 
@@ -495,7 +417,7 @@ class WebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Web View'));
+    return const Center(child: Text('Web View'));
   }
 }
 
@@ -504,6 +426,6 @@ class DefaultView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Default View'));
+    return const Center(child: Text('Default View'));
   }
 }
