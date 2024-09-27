@@ -46,7 +46,7 @@ class SlackSummary extends StatelessWidget {
           ),
           Text(
             '${controller.slackList.length} emails',
-            style: TextStyle(
+            style: const TextStyle(
               color: AppColors.black,
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -56,6 +56,7 @@ class SlackSummary extends StatelessWidget {
             height: 2,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'FROM: ',
@@ -65,17 +66,19 @@ class SlackSummary extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Row(
-                children: List.generate(senderList.length, (index) {
-                  return Text(
-                    '@${senderList[index]?.firstName} ',
-                    style: TextStyle(
-                      color: AppColors.black.withOpacity(0.56),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  );
-                }),
+              Expanded(
+                child: Wrap(
+                  children: List.generate(senderList.length, (index) {
+                    return Text(
+                      '@${senderList[index]?.firstName} ',
+                      style: TextStyle(
+                        color: AppColors.black.withOpacity(0.56),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    );
+                  }),
+                ),
               )
             ],
           ),
@@ -94,7 +97,7 @@ class SlackSummary extends StatelessWidget {
               Text(
                 'Summary',
                 style: TextStyle(
-                  color: AppColors.black.withOpacity(0.56),
+                  color: AppColors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -124,7 +127,7 @@ class SlackSummary extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(
-                        color: AppColors.black,
+                        color: AppColors.black.withOpacity(0.8),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
@@ -177,12 +180,12 @@ class SlackSummary extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
                     Radius.circular(8),
                   ),
                   color: Color(0xFF695DF0),

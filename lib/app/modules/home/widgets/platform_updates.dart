@@ -27,7 +27,6 @@ class PlatformUpdates extends StatelessWidget {
             style: TextStyle(
               color: Colors.black,
               fontSize: 16,
-              fontFamily: 'Montserrat',
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -64,7 +63,6 @@ class PlatformUpdates extends StatelessWidget {
         style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w500,
-          fontFamily: 'Montserrat',
         ),
       ),
       collapsedBackgroundColor: Color(0xFFD3D3D3),
@@ -77,7 +75,6 @@ class PlatformUpdates extends StatelessWidget {
         style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
-          fontFamily: 'Montserrat',
         ),
       ),
       children: [
@@ -111,7 +108,6 @@ class PlatformUpdates extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Montserrat',
           ),
         ),
         SizedBox(
@@ -122,7 +118,6 @@ class PlatformUpdates extends StatelessWidget {
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w400,
-            fontFamily: 'Montserrat',
           ),
         )
       ],

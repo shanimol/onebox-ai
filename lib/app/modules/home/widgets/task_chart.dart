@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/app/common/util/exports.dart';
 import 'package:nexus/gen/assets.gen.dart';
+import 'package:nexus/gen/fonts.gen.dart';
 
 class TaskChart extends StatelessWidget {
   const TaskChart({super.key});
@@ -79,10 +80,10 @@ class TaskChart extends StatelessWidget {
                     text: const TextSpan(
                         text: '12',
                         style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.black,
-                        ),
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.black,
+                            fontFamily: FontFamily.iBMPlexSans),
                         children: [
                           TextSpan(
                             text: ' New messages',
@@ -90,6 +91,7 @@ class TaskChart extends StatelessWidget {
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,
+                              fontFamily: FontFamily.iBMPlexSans,
                             ),
                           )
                         ]),

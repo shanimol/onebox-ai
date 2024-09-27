@@ -51,12 +51,17 @@ class ActionItem extends StatelessWidget {
                       height: 19.5 / 16,
                     ),
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Text(
                     task?.summary ?? '',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                      color: Colors.black.withOpacity(
+                        0.5,
+                      ),
                       height: 17.07 / 14,
                     ),
                     maxLines: 2,

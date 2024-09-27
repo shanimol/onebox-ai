@@ -59,7 +59,6 @@ class _MeetingsState extends State<Meetings> {
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
-                    fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -96,7 +95,6 @@ class _MeetingsState extends State<Meetings> {
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 12,
-                        fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w500,
                         height: 14 / 12,
                       ),
@@ -106,7 +104,6 @@ class _MeetingsState extends State<Meetings> {
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 12,
-                        fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w500,
                         height: 14 / 12,
                       ),
@@ -146,7 +143,6 @@ class _MeetingsState extends State<Meetings> {
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 12,
-                        fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w500,
                         height: 14 / 12,
                       ),
@@ -156,7 +152,6 @@ class _MeetingsState extends State<Meetings> {
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 12,
-                        fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w500,
                         height: 14 / 12,
                       ),
@@ -230,7 +225,6 @@ class _MeetingsState extends State<Meetings> {
                       Text(
                         name ?? '',
                         style: const TextStyle(
-                          fontFamily: 'Montserrat',
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -242,17 +236,17 @@ class _MeetingsState extends State<Meetings> {
                           Assets.images.clock.image(
                             height: 16,
                             width: 16,
+                            color: Colors.black.withOpacity(0.5),
                           ),
                           const SizedBox(
                             width: 6,
                           ),
                           Text(
                             time ?? '',
-                            style: const TextStyle(
-                              fontFamily: 'Montserrat',
+                            style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: Colors.black,
+                              color: Colors.black.withOpacity(0.5),
                             ),
                           ),
                         ],
@@ -275,15 +269,14 @@ class _MeetingsState extends State<Meetings> {
                   ),
                   border: Border.all(
                     color: selectedIndex == index
-                        ? Colors.black.withOpacity(0.07)
-                        : Colors.transparent,
+                        ? Colors.transparent
+                        : Colors.black.withOpacity(0.07),
                   ),
                   color: Colors.white,
                 ),
                 child: Text(
                   buttonTitle ?? '',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Color(0XFF181818),
@@ -302,7 +295,7 @@ class _MeetingsState extends State<Meetings> {
       .toList();
 
   String formattedTime(DateTime? date) {
-    return DateFormat('ha').format(date ?? DateTime.now()).toLowerCase(); // C
+    return DateFormat('ha').format(date ?? DateTime.now()).toUpperCase(); // C
   }
 
   List<Meeting> get completedMeetingsList => widget.controller.meetingsList

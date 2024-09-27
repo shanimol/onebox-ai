@@ -38,6 +38,7 @@ class HomeView extends GetView<HomeController> {
         centerTitle: false,
       ),
       body: Obx(() {
+        
         return Row(
           children: [
             // SidebarX for navigation
