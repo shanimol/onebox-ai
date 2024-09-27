@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nexus/app/common/integrations/googleSignIn.dart';
 import 'package:nexus/app/common/util/exports.dart';
-import 'package:nexus/app/modules/home/widgets/calendar.dart';
 import 'package:nexus/app/modules/home/widgets/dashboard_view.dart';
-import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 import '../../../../gen/assets.gen.dart';
@@ -31,13 +29,17 @@ class HomeView extends GetView<HomeController> {
             width: 40,
           ),
         ),
-        title: const Text(
-          'OneBox.ai',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: AppColors.black,
-          ),
+        title: Row(
+          children: [
+            Text(
+              'OneBox.ai',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: AppColors.black,
+              ),
+            ),
+          ],
         ),
         centerTitle: false,
       ),
@@ -70,10 +72,12 @@ class HomeView extends GetView<HomeController> {
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
-                              child: Image.network(
-                                GoogleSignInApi
-                                        .googleSignIn.currentUser?.photoUrl ??
-                                    Assets.images.profile.path,
+                              child: ClipOval(
+                                child: Image.network(
+                                  GoogleSignInApi
+                                          .googleSignIn.currentUser?.photoUrl ??
+                                      Assets.images.profile.path,
+                                ),
                               ),
                             );
                           },
@@ -140,19 +144,19 @@ class HomeView extends GetView<HomeController> {
                             controller.selectedNavbarIndex.value = 2;
                           },
                         ),
-                        SidebarXItem(
-                          iconBuilder: (selected, hovered) {
-                            return Assets.images.navbar1.image(
-                              height: 44,
-                              width: 44,
-                              color:
-                                  selected ? Color(0xFF695DF0) : Colors.black,
-                            );
-                          },
-                          onTap: () {
-                            controller.selectedNavbarIndex.value = 3;
-                          },
-                        ),
+                        // SidebarXItem(
+                        //   iconBuilder: (selected, hovered) {
+                        //     return Assets.images.navbar1.image(
+                        //       height: 44,
+                        //       width: 44,
+                        //       color:
+                        //           selected ? Color(0xFF695DF0) : Colors.black,
+                        //     );
+                        //   },
+                        //   onTap: () {
+                        //     controller.selectedNavbarIndex.value = 3;
+                        //   },
+                        // ),
                       ],
                     ),
                     Expanded(

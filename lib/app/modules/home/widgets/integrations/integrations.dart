@@ -36,7 +36,7 @@ class _IntegrationsState extends State<Integrations> {
     GoogleSignInApi.googleSignIn.onCurrentUserChanged
         .listen((GoogleSignInAccount? account) async {
       Fluttertoast.showToast(
-          msg: "User Signed In${account?.email.toString()}",
+          msg: "User Signed In ${account?.email.toString()}",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 10,

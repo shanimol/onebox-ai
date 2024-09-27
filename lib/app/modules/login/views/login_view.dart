@@ -26,11 +26,11 @@ class _LoginViewState extends State<LoginView> {
           msg: "User Signed In${account?.email.toString()}",
           toastLength: Toast.LENGTH_LONG,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 10,
-          backgroundColor: Colors.red,
+          timeInSecForIosWeb: 4,
+          backgroundColor: Color(0xFF695DF0),
           textColor: Colors.white,
           fontSize: 16.0);
-      Get.toNamed(Routes.HOME);
+      Get.offNamed(Routes.HOME);
     });
     GoogleSignInApi.googleSignIn.signInSilently();
   }
