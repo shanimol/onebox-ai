@@ -83,20 +83,12 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ],
                       theme: SidebarXTheme(
-                        margin: const EdgeInsets.only(
-                          left: 11,
-                          right: 11,
-                          //top: 29,
-                          bottom: 29,
-                        ),
                         decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         selectedItemDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.black.withOpacity(0.37),
-                          ),
+                          color: Color(0xFFEDECFA),
                         ),
                       ),
                       items: [
@@ -105,6 +97,8 @@ class HomeView extends GetView<HomeController> {
                             return Assets.images.navbar4.image(
                               height: 44,
                               width: 44,
+                              color:
+                                  selected ? Color(0xFF695DF0) : Colors.black,
                             );
                           },
                           //label: 'Home',
@@ -117,6 +111,8 @@ class HomeView extends GetView<HomeController> {
                             return Assets.images.navbar2.image(
                               height: 44,
                               width: 44,
+                              color:
+                                  selected ? Color(0xFF695DF0) : Colors.black,
                             );
                           },
                           onTap: () {
@@ -128,6 +124,8 @@ class HomeView extends GetView<HomeController> {
                             return Assets.images.navbar3.image(
                               height: 44,
                               width: 44,
+                              color:
+                                  selected ? Color(0xFF695DF0) : Colors.black,
                             );
                           },
                           onTap: () {
@@ -139,6 +137,8 @@ class HomeView extends GetView<HomeController> {
                             return Assets.images.navbar1.image(
                               height: 44,
                               width: 44,
+                              color:
+                                  selected ? Color(0xFF695DF0) : Colors.black,
                             );
                           },
                           onTap: () {
