@@ -17,9 +17,8 @@ class _MeetingsState extends State<Meetings> {
       //width: 470,
       height: 310,
       padding: const EdgeInsets.only(
-        top: 9,
-        left: 16,
-        right: 16,
+        left: 7,
+        right: 7,
       ),
       decoration: BoxDecoration(
         boxShadow: [
@@ -28,7 +27,7 @@ class _MeetingsState extends State<Meetings> {
             color: Colors.white.withOpacity(0.12),
           )
         ],
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(22),
         ),
         color: Colors.white,
@@ -36,25 +35,32 @@ class _MeetingsState extends State<Meetings> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Assets.images.gmeet.image(
-                height: 27,
-                width: 27,
-              ),
-              SizedBox(
-                width: 27,
-              ),
-              const Text(
-                'Meetings',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 9,
+              left: 9,
+              right: 9,
+            ),
+            child: Row(
+              children: [
+                Assets.images.gmeet.image(
+                  height: 27,
+                  width: 27,
                 ),
-              ),
-            ],
+                const SizedBox(
+                  width: 27,
+                ),
+                const Text(
+                  'Meetings',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 17),
           Expanded(child: upcomingMeetings()),
@@ -65,11 +71,17 @@ class _MeetingsState extends State<Meetings> {
 
   Widget upcomingMeetings() {
     return Container(
-      color: Color(0xFFFBFBFB),
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(9),
+        ),
+        color: const Color(0xFFFBFBFB),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -126,14 +138,15 @@ class _MeetingsState extends State<Meetings> {
         decoration: BoxDecoration(
           border: index == selectedIndex
               ? Border.all(
-                  color: Color(0xFFD72F59),
+                  color: const Color(0xFFD72F59),
                   width: 2,
                 )
               : Border.all(
                   color: Colors.transparent,
                 ),
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: selectedIndex == index ? Color(0xFFFCF0F3) : Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          color:
+              selectedIndex == index ? const Color(0xFFFCF0F3) : Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,7 +180,7 @@ class _MeetingsState extends State<Meetings> {
                             height: 16,
                             width: 16,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Text(
@@ -193,11 +206,16 @@ class _MeetingsState extends State<Meetings> {
                   horizontal: 10,
                   vertical: 6,
                 ),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(
                     Radius.circular(7),
                   ),
-                  color: Color(0xFF050505),
+                  border: Border.all(
+                    color: selectedIndex == index
+                        ? Colors.black.withOpacity(0.07)
+                        : Colors.transparent,
+                  ),
+                  color: Colors.white,
                 ),
                 child: const Text(
                   'Prep Me',
@@ -205,7 +223,7 @@ class _MeetingsState extends State<Meetings> {
                     fontFamily: 'Montserrat',
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                    color: Color(0XFF181818),
                   ),
                 ),
               ),
