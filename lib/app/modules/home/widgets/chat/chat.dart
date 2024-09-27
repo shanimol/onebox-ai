@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
@@ -83,23 +86,32 @@ class _ChatPageState extends State<ChatPage> {
         },
       ));
 
-  void _loadInitialMessages() {
-    final user1Message = types.TextMessage(
-      author: _user1,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: 'Hello! How are you?',
-    );
+  void _loadInitialMessages() async {
+    // final user1Message = types.TextMessage(
+    //   author: _user1,
+    //   createdAt: DateTime.now().millisecondsSinceEpoch,
+    //   id: const Uuid().v4(),
+    //   text: 'Hello! How are you?',
+    // );
+    //
+    // final replyMessage = types.TextMessage(
+    //   author: _user2,
+    //   createdAt: DateTime.now().millisecondsSinceEpoch,
+    //   id: const Uuid().v4(),
+    //   text: 'I\'m good! How about you?',
+    // );
+    // setState(() {
+    //   _messages = [replyMessage, user1Message];
+    //   // _messages.insert(0, replyMessage);
+    // });
 
-    final replyMessage = types.TextMessage(
-      author: _user2,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: const Uuid().v4(),
-      text: 'I\'m good! How about you?',
-    );
+    final response = await rootBundle.loadString('assets/messages.json');
+    final messages = (jsonDecode(response) as List)
+        .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
+        .toList();
+
     setState(() {
-      _messages = [replyMessage, user1Message];
-      // _messages.insert(0, replyMessage);
+      _messages = messages;
     });
   }
 
