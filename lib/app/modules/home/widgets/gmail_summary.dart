@@ -59,7 +59,7 @@ class GmailSummary extends StatelessWidget {
           ),
           Obx(
             () => Text(
-              '${controller.emaildata.value?.emails?.length ?? 0} emails',
+              '${controller.emaildata.length} emails',
               style: const TextStyle(
                 color: AppColors.black,
                 fontSize: 14,
@@ -125,9 +125,8 @@ class GmailSummary extends StatelessWidget {
           Obx(
             () => Expanded(
               child: Column(
-                children: List.generate(
-                    min(3, controller.emaildata.value?.emails?.length ?? 0),
-                    (index) {
+                children:
+                    List.generate(min(3, controller.emaildata.length), (index) {
                   return Column(
                     children: [
                       Container(
@@ -142,8 +141,7 @@ class GmailSummary extends StatelessWidget {
                             ),
                             color: Color(0XFFF0F0F0)),
                         child: Text(
-                          controller.emaildata.value?.emails?[index].summary ??
-                              '',
+                          controller.emaildata[index].summary ?? '',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
@@ -237,10 +235,6 @@ class GmailSummary extends StatelessWidget {
   }
 
   List<User?> get senderList {
-    return controller.emaildata.value?.emails
-            ?.map((e) => e.sender)
-            .toSet()
-            .toList() ??
-        [];
+    return controller.emaildata.map((e) => e.sender).toSet().toList();
   }
 }
