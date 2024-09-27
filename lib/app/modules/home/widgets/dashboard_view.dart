@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
-import 'package:nexus/app/modules/home/widgets/action_item.dart';
-import 'package:nexus/app/modules/home/widgets/calendar.dart';
-import 'package:nexus/app/modules/home/widgets/meeting_count.dart';
 import 'package:nexus/app/modules/home/widgets/meetings.dart';
-import 'package:nexus/app/modules/home/widgets/messages_count.dart';
 import 'package:nexus/app/modules/home/widgets/summary.dart';
 import 'package:nexus/app/modules/home/widgets/task_card.dart';
 import 'package:nexus/app/modules/home/widgets/task_chart.dart';
+
+import 'dashboard_right_drawer.dart';
 
 class DashboardView extends StatelessWidget {
   final HomeController controller;
@@ -77,10 +75,12 @@ class DashboardView extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Calendar(
-            controller: controller,
-          ),
-        ),
+            child: RightDrawer(
+          controller: controller,
+        )
+            // Calendar(
+            //   controller: controller,
+            ),
       ],
     );
   }

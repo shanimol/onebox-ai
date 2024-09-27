@@ -4,6 +4,7 @@ import 'package:nexus/app/data/models/task.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
+import '../../../common/values/app_colors.dart';
 import 'action_item.dart';
 import 'dragging_action_item.dart';
 
@@ -13,7 +14,18 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(19),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.gray32.withOpacity(.2),
+            blurRadius: 10,
+            spreadRadius: 5,
+          ),
+        ],
+      ),
       height: 310,
       child: Card(
         color: Colors.white,

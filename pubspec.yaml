@@ -30,6 +30,7 @@ dependencies:
   visibility_detector: 0.4.0+2
   flutter_chat_ui: ^1.6.15
   get: 4.6.6
+  tab_container: ^3.5.3
   fluttertoast: ^8.2.8
   flutter: 
     sdk: flutter

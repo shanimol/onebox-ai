@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nexus/app/common/event_bus/events.dart';
 import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
+
+import '../../../common/values/app_colors.dart';
 
 class Meetings extends StatefulWidget {
   const Meetings({super.key});
@@ -22,15 +25,14 @@ class _MeetingsState extends State<Meetings> {
         right: 16,
       ),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(19),
         boxShadow: [
           BoxShadow(
-            blurRadius: 5,
-            color: Colors.white.withOpacity(0.12),
-          )
+            color: AppColors.gray32.withOpacity(.2),
+            blurRadius: 10,
+            spreadRadius: 5,
+          ),
         ],
-        borderRadius: BorderRadius.all(
-          Radius.circular(22),
-        ),
         color: Colors.white,
       ),
       child: Column(
@@ -187,7 +189,10 @@ class _MeetingsState extends State<Meetings> {
               ),
             ),
             AnimatedTap(
-              onTap: () {},
+              onTap: () {
+                eventBus.fire(ChatEvent(
+                    message: 'Prepare me for tomorrow\'s meeting with joy'));
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,

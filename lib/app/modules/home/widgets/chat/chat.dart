@@ -10,16 +10,20 @@ import 'package:sidebarx/sidebarx.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../common/event_bus/events.dart';
+import '../../../../common/values/app_colors.dart';
 
 class ChatPage extends StatefulWidget {
-  HomeController controller;
-  ChatPage({Key? key, required this.controller}) : super(key: key);
+  final HomeController controller;
+  final bool shouldShowList;
+  ChatPage({Key? key, required this.controller, this.shouldShowList = true})
+      : super(key: key);
 
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatPageState extends State<ChatPage>
+    with AutomaticKeepAliveClientMixin {
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
 
@@ -43,48 +47,73 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(body: Builder(
-        builder: (context) {
-          final isSmallScreen = MediaQuery.of(context).size.width < 600;
-          return Scaffold(
-            key: _key,
-            appBar: isSmallScreen
-                ? AppBar(
-                    backgroundColor: canvasColor,
-                    title: Text(_getTitleByIndex(_controller.selectedIndex)),
-                    leading: IconButton(
-                      onPressed: () {
-                        // if (!Platform.isAndroid && !Platform.isIOS) {
-                        //   _controller.setExtended(true);
-                        // }
-                        _key.currentState?.openDrawer();
-                      },
-                      icon: const Icon(Icons.menu),
-                    ),
-                  )
-                : null,
-            drawer: ExampleSidebarX(controller: _controller),
-            body: Row(
-              children: [
-                if (!isSmallScreen) ExampleSidebarX(controller: _controller),
-                Expanded(
-                  child: Center(
-                      child: Chat(
-                    messages: _messages,
-                    onSendPressed: _handleSendPressed,
-                    user: _user1,
-                    theme: DefaultChatTheme(backgroundColor: Color(0xFFFAFAFA)),
-                  )
-                      // ScreensExample(
-                      //   controller: _controller,
-                      // ),
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return Scaffold(body: Builder(
+      builder: (context) {
+        final isSmallScreen = MediaQuery.of(context).size.width < 1000;
+        return Scaffold(
+          key: _key,
+          appBar: isSmallScreen
+              ? AppBar(
+                  backgroundColor: canvasColor,
+                  title: Text(_getTitleByIndex(_controller.selectedIndex)),
+                  leading: IconButton(
+                    onPressed: () {
+                      // if (!Platform.isAndroid && !Platform.isIOS) {
+                      //   _controller.setExtended(true);
+                      // }
+                      _key.currentState?.openDrawer();
+                    },
+                    icon: const Icon(Icons.menu),
+                  ),
+                )
+              : null,
+          drawer: ExampleSidebarX(controller: _controller),
+          body: Row(
+            children: [
+              if (widget.shouldShowList)
+                ExampleSidebarX(controller: _controller),
+              Expanded(
+                child: Center(
+                    child: Chat(
+                  messages: _messages,
+                  onSendPressed: _handleSendPressed,
+                  user: _user1,
+                  theme: DefaultChatTheme(
+                      backgroundColor: Color(0xFFFAFAFA),
+                      sendButtonIcon: SendIconWidget(),
+                      inputPadding: const EdgeInsets.all(10),
+                      inputTextColor: AppColors.black,
+                      inputContainerDecoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: AppColors.black11.withOpacity(.2),
+                        ),
                       ),
-                ),
-              ],
-            ),
-          );
-        },
-      ));
+                      inputBackgroundColor: AppColors.white),
+                )
+                    // ScreensExample(
+                    //   controller: _controller,
+                    // ),
+                    ),
+              ),
+            ],
+          ),
+        );
+      },
+    ));
+  }
 
   void _loadInitialMessages() async {
     // final user1Message = types.TextMessage(
@@ -143,7 +172,8 @@ class _ChatPageState extends State<ChatPage> {
     _addMessage(textMessage);
 
     (await widget.controller.repository.getData())?.fold((l) {
-      _handleMessageReceived(types.PartialText(text: "Error"));
+      _handleMessageReceived(
+          types.PartialText(text: "Wait for sometime...Sell your dreams"));
     }, (r) {
       _handleMessageReceived(types.PartialText(text: "Message Received"));
     });
@@ -168,5 +198,21 @@ String _getTitleByIndex(int index) {
       return 'Settings';
     default:
       return 'Not found page';
+  }
+}
+
+class SendIconWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.gray19, // Background color
+        shape: BoxShape.circle, // Circular shape
+      ),
+      child: IconButton(
+        icon: Icon(Icons.send),
+        color: Colors.white, onPressed: null, // Icon color
+      ),
+    );
   }
 }

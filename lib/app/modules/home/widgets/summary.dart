@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nexus/app/common/event_bus/events.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
+import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
 class Summary extends StatelessWidget {
@@ -11,11 +13,18 @@ class Summary extends StatelessWidget {
       width: 340,
       //height: 320,
       padding: const EdgeInsets.all(12),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFFFBFBFB),
         borderRadius: BorderRadius.all(
           Radius.circular(19),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.gray32.withOpacity(.2),
+            blurRadius: 10,
+            spreadRadius: 5,
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,21 +164,27 @@ class Summary extends StatelessWidget {
               SizedBox(
                 width: 8,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(8),
+              AnimatedTap(
+                onTap: () {
+                  eventBus.fire(
+                      ChatEvent(message: "Did I miss any important task?"));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(8),
+                    ),
+                    color: Color(0xFFD72F59),
                   ),
-                  color: Color(0xFFD72F59),
-                ),
-                height: 36,
-                padding: const EdgeInsets.all(8),
-                child: const Text(
-                  'View details',
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  height: 36,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text(
+                    'View details',
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
