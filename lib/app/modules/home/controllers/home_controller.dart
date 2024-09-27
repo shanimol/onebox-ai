@@ -20,6 +20,14 @@ class HomeController extends GetxController {
     appData.value = (await repository.getData()).getRight();
   }
 
+  Future<void> fetchData() async {
+    appData.value = (await repository.getData()).getRight();
+  }
+
+  Future<void> getResponse(String? message) async {
+    appData.value = (await repository.getData()).getRight();
+  }
+
   @override
   void onReady() {
     super.onReady();

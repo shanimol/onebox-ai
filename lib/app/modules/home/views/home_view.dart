@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../gen/assets.gen.dart';
+import '../../../common/event_bus/events.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/action_item.dart';
-import '../widgets/chat.dart';
+import '../widgets/chat/chat.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
@@ -15,11 +16,15 @@ class HomeView extends GetView<HomeController> {
           title: const Text('HomeView'),
           centerTitle: true,
         ),
-        body: DashboardPage());
+        body: DashboardPage(
+          controller: controller,
+        ));
   }
 }
 
 class DashboardPage extends StatelessWidget {
+  HomeController controller;
+  DashboardPage({Key? key, required this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,34 +40,40 @@ class DashboardPage extends StatelessWidget {
           _buildDropDown('Alerts'),
         ],
       ),
-      body: Row(
-        children: [
-          Expanded(
-            child: Container(
-              color: Colors.grey[300],
-            ),
-            flex: 1,
-          ),
-          Expanded(
-            flex: 20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTopPriority(),
-                _buildActionItems(),
-                _buildMeetingsAndUpdates(),
-              ],
-            ),
-          ),
-          // Right Chat Space
-          Expanded(
-              flex: 6,
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: ChatPage(),
-              ))
-        ],
+      body: Directionality(
+        textDirection: TextDirection.ltr,
+        child: ChatPage(
+          controller: controller,
+        ),
       ),
+      // body: Row(
+      //   children: [
+      //     Expanded(
+      //       child: Container(
+      //         color: Colors.grey[300],
+      //       ),
+      //       flex: 1,
+      //     ),
+      //     Expanded(
+      //       flex: 20,
+      //       child: Column(
+      //         crossAxisAlignment: CrossAxisAlignment.start,
+      //         children: [
+      //           _buildTopPriority(),
+      //           _buildActionItems(),
+      //           _buildMeetingsAndUpdates(),
+      //         ],
+      //       ),
+      //     ),
+      //     // Right Chat Space
+      //     Expanded(
+      //         flex: 6,
+      //         child: Directionality(
+      //           textDirection: TextDirection.ltr,
+      //           child: ChatPage(),
+      //         ))
+      //   ],
+      // ),
     );
   }
 
@@ -71,7 +82,9 @@ class DashboardPage extends StatelessWidget {
       value: title,
       icon: const Icon(Icons.arrow_downward, color: Colors.black),
       underline: SizedBox(),
-      onChanged: (String? newValue) {},
+      onChanged: (String? newValue) {
+        eventBus.fire(ChatEvent(message: newValue));
+      },
       items: <String>[title].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
