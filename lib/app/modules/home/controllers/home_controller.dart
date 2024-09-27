@@ -18,7 +18,7 @@ class HomeController extends GetxController {
       SidebarXController(selectedIndex: 0, extended: true);
   final RxInt selectedNavbarIndex = 0.obs;
   final RxInt taskCardSectionIndex = 0.obs;
-
+  
   HomeController({required this.repository});
 
   final count = 0.obs;

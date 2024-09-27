@@ -13,7 +13,7 @@ class GmailSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 340,
+      width: MediaQuery.of(context).size.width <= 800 ? double.infinity : 340,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Color(0xFFFBFBFB),
