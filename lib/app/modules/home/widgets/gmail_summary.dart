@@ -207,7 +207,7 @@ class GmailSummary extends StatelessWidget {
                 onTap: () {
                   eventBus.fire(ChatEvent(
                       message:
-                          "Summarize all my unread emails ordered from top priority to least?"));
+                          "Summarize all my today's emails ordered from top priority to least?"));
                 },
                 child: Container(
                   decoration: BoxDecoration(
