@@ -8,197 +8,205 @@ class ActionItem extends StatefulWidget {
   final String actionId;
   final NexusActionSource source;
 
-  const ActionItem(
-      {super.key,
-      required this.title,
-      required this.action,
-      required this.summary,
-      required this.actionId,
-      required this.source});
+  const ActionItem({
+    super.key,
+    required this.title,
+    required this.action,
+    required this.summary,
+    required this.actionId,
+    required this.source,
+  });
 
   @override
   State<ActionItem> createState() => _ActionItemState();
 }
 
 class _ActionItemState extends State<ActionItem> {
+  bool isExpanded = false;
+  final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 15,
-        vertical: 12,
-      ),
-      decoration: BoxDecoration(
-        color: Color(0xFFF8F8F8),
-        borderRadius: BorderRadius.circular(
-          10,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 15,
+          vertical: 12,
         ),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSourceIcon(),
-          SizedBox(
-            width: 9.74,
+        decoration: BoxDecoration(
+          color: Color(0xFFF8F8F8),
+          borderRadius: BorderRadius.circular(
+            10,
           ),
-          Expanded(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        widget.title,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          height: 17.07 / 14,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFA8E2EA),
-                        borderRadius: BorderRadius.circular(
-                          17,
-                        ),
-                      ),
-                      child: Text(
-                        widget.action.name,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          height: 14.63 / 12,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 35.89,
-                    ),
-                    Assets.images.search.image(
-                      height: 20,
-                      width: 20,
-                    ),
-                    SizedBox(
-                      width: 13,
-                    ),
-                    Assets.images.assign.image(
-                      height: 20,
-                      width: 20,
-                    ),
-                    SizedBox(
-                      width: 13,
-                    ),
-                    Assets.images.delete.image(
-                      height: 20,
-                      width: 20,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 9.29,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "Summary",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                        height: 17.07 / 14,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 9.18,
-                    ),
-                    Assets.images.ai.image(
-                      height: 14,
-                      width: 11.64,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  widget.summary,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                    height: 17.07 / 14,
-                  ),
-                ),
-                SizedBox(
-                  height: 9.79,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        color: Colors.white,
-                        child: TextFormField(
-                          cursorHeight: 18,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 9.5,
-                            ),
-                            hintText: "Reply",
-                            hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black,
-                              height: 17.92 / 14,
-                            ),
-                            fillColor: Colors.white,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSourceIcon(),
+            SizedBox(
+              width: 9.74,
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.title,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            height: 17.07 / 14,
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Assets.images.send.image(
-                      height: 22.92,
-                      width: 22.92,
-                    ),
-                    SizedBox(
-                      width: 34,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 11,
-                        vertical: 8.5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF205ACC),
-                        borderRadius: BorderRadius.circular(
-                          6,
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFA8E2EA),
+                          borderRadius: BorderRadius.circular(
+                            17,
+                          ),
+                        ),
+                        child: Text(
+                          widget.action.name,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            height: 14.63 / 12,
+                          ),
                         ),
                       ),
-                      child: Text(
-                        "Mark as done",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          height: 14.63 / 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-              ],
+                      isExpanded
+                          ? SizedBox(
+                              width: 35.89,
+                            )
+                          : Spacer(),
+                      isExpanded
+                          ? Row(
+                              children: [
+                                Assets.images.search.image(
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                SizedBox(
+                                  width: 13,
+                                ),
+                                Assets.images.assign.image(
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                SizedBox(
+                                  width: 13,
+                                ),
+                                Assets.images.delete.image(
+                                  height: 20,
+                                  width: 20,
+                                ),
+                              ],
+                            )
+                          : _buildMarkAsDone(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 9.29,
+                  ),
+                  AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    child: isExpanded
+                        ? Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Summary",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                      height: 17.07 / 14,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 9.18,
+                                  ),
+                                  Assets.images.ai.image(
+                                    height: 14,
+                                    width: 11.64,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Text(
+                                widget.summary,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.black,
+                                  height: 17.07 / 14,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 9.79,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      color: Colors.white,
+                                      child: TextFormField(
+                                        controller: controller,
+                                        cursorHeight: 18,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                            vertical: 9.5,
+                                          ),
+                                          hintText: "Reply",
+                                          hintStyle: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.black,
+                                            height: 17.92 / 14,
+                                          ),
+                                          fillColor: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 12,
+                                  ),
+                                  Assets.images.send.image(
+                                    height: 22.92,
+                                    width: 22.92,
+                                  ),
+                                  SizedBox(
+                                    width: 34,
+                                  ),
+                                  _buildMarkAsDone(),
+                                ],
+                              ),
+                            ],
+                          )
+                        : SizedBox(),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -216,6 +224,30 @@ class _ActionItemState extends State<ActionItem> {
           width: 20,
         );
     }
+  }
+
+  Widget _buildMarkAsDone() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 11,
+        vertical: 8.5,
+      ),
+      decoration: BoxDecoration(
+        color: Color(0xFF205ACC),
+        borderRadius: BorderRadius.circular(
+          6,
+        ),
+      ),
+      child: Text(
+        "Mark as done",
+        style: TextStyle(
+          fontSize: 12,
+          color: Colors.white,
+          fontWeight: FontWeight.w500,
+          height: 14.63 / 12,
+        ),
+      ),
+    );
   }
 }
 
