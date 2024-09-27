@@ -264,7 +264,8 @@ class _MeetingsState extends State<Meetings> {
             AnimatedTap(
               onTap: () {
                 eventBus.fire(ChatEvent(
-                    message: 'Prepare me for tomorrow\'s meeting with James'));
+                    message:
+                        'Summarize all my chat communications received in the last 24 hrs.'));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(

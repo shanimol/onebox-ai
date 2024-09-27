@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
@@ -34,7 +31,7 @@ class _ChatPageState extends State<ChatPage>
       lastName: 'Doe');
   final _user2 = const types.User(
       id: '72091008-a484-4a89-ae75-a22bf8d6f3ac',
-      firstName: 'Jane',
+      firstName: 'Sharbel',
       lastName: 'Na');
 
   @override
@@ -90,6 +87,15 @@ class _ChatPageState extends State<ChatPage>
                       messages: _messages,
                       onSendPressed: _handleSendPressed,
                       user: _user1,
+                      emptyState: Center(
+                        child: Text(
+                          'No messages yeteee',
+                          style: TextStyle(
+                            color: AppColors.black,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                       theme: DefaultChatTheme(
                           backgroundColor: Color(0xFFFAFAFA),
                           sendButtonIcon: SendIconWidget(),
@@ -123,26 +129,27 @@ class _ChatPageState extends State<ChatPage>
     //   id: const Uuid().v4(),
     //   text: 'Hello! How are you?',
     // );
-    //
-    // final replyMessage = types.TextMessage(
-    //   author: _user2,
-    //   createdAt: DateTime.now().millisecondsSinceEpoch,
-    //   id: const Uuid().v4(),
-    //   text: 'I\'m good! How about you?',
-    // );
-    // setState(() {
-    //   _messages = [replyMessage, user1Message];
-    //   // _messages.insert(0, replyMessage);
-    // });
 
-    final response = await rootBundle.loadString('assets/messages.json');
-    final messages = (jsonDecode(response) as List)
-        .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
-        .toList();
-
+    final initialMessage = types.TextMessage(
+      author: _user2,
+      createdAt: DateTime.now().millisecondsSinceEpoch,
+      id: const Uuid().v4(),
+      text:
+          'Hello, I’m Delmo! \uD83D\uDC4B \nI’m your personal assistant to tackle your day-to-day activities. How can I help you?"',
+    );
     setState(() {
-      _messages = messages;
+      _messages = [initialMessage];
+      // _messages.insert(0, replyMessage);
     });
+
+    // final response = await rootBundle.loadString('assets/messages.json');
+    // final messages = (jsonDecode(response) as List)
+    //     .map((e) => types.Message.fromJson(e as Map<String, dynamic>))
+    //     .toList();
+    //
+    // setState(() {
+    //   _messages = messages;
+    // });
   }
 
   void _addMessage(types.Message message) {
@@ -172,11 +179,13 @@ class _ChatPageState extends State<ChatPage>
 
     _addMessage(textMessage);
 
-    (await widget.controller.repository.getData())?.fold((l) {
+    (await widget.controller.repository.getAIChatResponse(textMessage.text))
+        ?.fold((l) {
       _handleMessageReceived(
-          types.PartialText(text: "Wait for sometime...Sell your dreams"));
+          types.PartialText(text: "Sorry, We couldn't process your request."));
     }, (r) {
-      _handleMessageReceived(types.PartialText(text: "Message Received"));
+      _handleMessageReceived(types.PartialText(
+          text: r.message ?? "Sorry, We couldn't process your request."));
     });
   }
 }

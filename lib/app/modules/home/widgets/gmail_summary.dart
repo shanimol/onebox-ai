@@ -205,8 +205,9 @@ class GmailSummary extends StatelessWidget {
               ),
               AnimatedTap(
                 onTap: () {
-                  eventBus.fire(
-                      ChatEvent(message: "Did I miss any important task?"));
+                  eventBus.fire(ChatEvent(
+                      message:
+                          "Summarize all my today's emails ordered from top priority to least?"));
                 },
                 child: Container(
                   decoration: BoxDecoration(

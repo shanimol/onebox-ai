@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
-import 'package:nexus/app/modules/home/widgets/calendar.dart';
-import 'package:nexus/app/modules/home/widgets/meetings.dart';
 import 'package:nexus/app/modules/home/widgets/gmail_summary.dart';
 import 'package:nexus/app/modules/home/widgets/meetings.dart';
 import 'package:nexus/app/modules/home/widgets/slack_summary.dart';
@@ -13,7 +10,6 @@ import 'package:nexus/app/modules/home/widgets/task_chart.dart';
 import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
-import '../../../../gen/fonts.gen.dart';
 import 'dashboard_right_drawer.dart';
 
 class DashboardView extends StatelessWidget {

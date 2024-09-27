@@ -11,6 +11,7 @@ import '../../common/di/injectable.dart';
 import '../../common/util/utils.dart';
 import '../api/api_client.dart';
 import '../api/api_provider.dart';
+import '../models/chat_response.dart';
 import '../models/configuration.dart';
 import '../models/task.dart' as task;
 
@@ -24,6 +25,7 @@ abstract class IAppRepository {
   Future<Either<dynamic, Configuration>> getData();
   Future<Either<dynamic, List<task.Task>>> getTasks();
   Future<Either<dynamic, List<Meeting>>> getMeetings();
+  Future<Either<dynamic, ChatResponse>> getAIChatResponse(String message);
   Future<Either<dynamic, List<Email>>> getEmails();
   Future<Either<dynamic, List<Slack>>> getSlackMessages();
 }
@@ -107,6 +109,32 @@ class AppRepository extends IAppRepository {
       final result = await compute(
         Utils.extractClassListFromJson<Slack>,
         response["data"],
+      );
+      return Right(result);
+    } catch (exception) {
+      return Left(exception);
+    }
+  }
+
+  @override
+  Future<Either<dynamic, ChatResponse>> getAIChatResponse(
+      String message) async {
+    dynamic response;
+    try {
+      final encodedMessage = Uri.encodeComponent(message);
+
+      response = await api.post(
+        uri: '$baseUrl/chat',
+        queryParameters: {
+          "data": encodedMessage,
+        },
+        // data: {
+        //   "data": encodedMessage,
+        // },
+      );
+      final result = await compute(
+        Utils.extractClassFromJson<ChatResponse>,
+        response,
       );
       return Right(result);
     } catch (exception) {
