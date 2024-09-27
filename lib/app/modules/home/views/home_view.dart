@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nexus/app/common/integrations/googleSignIn.dart';
+import 'package:nexus/app/common/util/exports.dart';
+import 'package:nexus/app/modules/home/widgets/calendar.dart';
 import 'package:nexus/app/modules/home/widgets/dashboard_view.dart';
+import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 import '../../../../gen/assets.gen.dart';
@@ -37,90 +41,162 @@ class HomeView extends GetView<HomeController> {
         ),
         centerTitle: false,
       ),
-      body: Obx(() {
-        return Row(
-          children: [
-            // SidebarX for navigation
-            SidebarX(
-              controller: controller.sideBarController,
-              theme: SidebarXTheme(
-                margin: const EdgeInsets.only(
-                  left: 10,
-                  right: 11,
-                  //top: 29,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    right: BorderSide(
-                      color: AppColors.gray19.withOpacity(0.2),
+      body: Obx(
+        () {
+          return MediaQuery.of(context).size.width <= 800
+              ? Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                          color: const Color(0xFFFBFBFB),
+                          child: _getPageContent(
+                              controller.selectedNavbarIndex.value)),
                     ),
-                  ),
-                ),
-                hoverColor: Colors.amberAccent,
-                selectedItemDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: Colors.black.withOpacity(0.37),
-                  ),
-                ),
-              ),
-              items: [
-                SidebarXItem(
-                  iconBuilder: (selected, hovered) {
-                    return Assets.images.navbar4.image(
-                      height: 42,
-                      width: 42,
-                    );
-                  },
-                  //label: 'Home',
-                  onTap: () {
-                    controller.selectedNavbarIndex.value = 0;
-                  },
-                ),
-                SidebarXItem(
-                  iconBuilder: (selected, hovered) {
-                    return Assets.images.navbar2.image(
-                      height: 42,
-                      width: 42,
-                    );
-                  },
-                  onTap: () {
-                    controller.selectedNavbarIndex.value = 1;
-                  },
-                ),
-                SidebarXItem(
-                  iconBuilder: (selected, hovered) {
-                    return Assets.images.navbar3.image(
-                      height: 42,
-                      width: 42,
-                    );
-                  },
-                  onTap: () {
-                    controller.selectedNavbarIndex.value = 2;
-                  },
-                ),
-                SidebarXItem(
-                  iconBuilder: (selected, hovered) {
-                    return Assets.images.navbar1.image(
-                      height: 42,
-                      width: 42,
-                    );
-                  },
-                  onTap: () {
-                    controller.selectedNavbarIndex.value = 3;
-                  },
-                ),
-              ],
-            ),
-            Expanded(
-              child: Container(
-                  color: const Color(0xFFFBFBFB),
-                  child: _getPageContent(controller.selectedNavbarIndex.value)),
-            )
-          ],
-        );
-      }),
+                    mobileViewBottomNavBar(),
+                  ],
+                )
+              : Row(
+                  children: [
+                    // SidebarX for navigation
+                    SidebarX(
+                      controller: controller.sideBarController,
+                      showToggleButton: false,
+                      footerItems: [
+                        SidebarXItem(
+                          iconBuilder: (selected, hovered) {
+                            return Container(
+                              height: 44,
+                              width: 44,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.network(
+                                GoogleSignInApi
+                                        .googleSignIn.currentUser?.photoUrl ??
+                                    Assets.images.profile.path,
+                              ),
+                            );
+                          },
+                          //label: 'Home',
+                          onTap: () {
+                            controller.selectedNavbarIndex.value = 0;
+                          },
+                        ),
+                      ],
+                      theme: SidebarXTheme(
+                        margin: const EdgeInsets.only(
+                          left: 11,
+                          right: 11,
+                          //top: 29,
+                          bottom: 29,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        selectedItemDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: Colors.black.withOpacity(0.37),
+                          ),
+                        ),
+                      ),
+                      items: [
+                        SidebarXItem(
+                          iconBuilder: (selected, hovered) {
+                            return Assets.images.navbar4.image(
+                              height: 44,
+                              width: 44,
+                            );
+                          },
+                          //label: 'Home',
+                          onTap: () {
+                            controller.selectedNavbarIndex.value = 0;
+                          },
+                        ),
+                        SidebarXItem(
+                          iconBuilder: (selected, hovered) {
+                            return Assets.images.navbar2.image(
+                              height: 44,
+                              width: 44,
+                            );
+                          },
+                          onTap: () {
+                            controller.selectedNavbarIndex.value = 1;
+                          },
+                        ),
+                        SidebarXItem(
+                          iconBuilder: (selected, hovered) {
+                            return Assets.images.navbar3.image(
+                              height: 44,
+                              width: 44,
+                            );
+                          },
+                          onTap: () {
+                            controller.selectedNavbarIndex.value = 2;
+                          },
+                        ),
+                        SidebarXItem(
+                          iconBuilder: (selected, hovered) {
+                            return Assets.images.navbar1.image(
+                              height: 44,
+                              width: 44,
+                            );
+                          },
+                          onTap: () {
+                            controller.selectedNavbarIndex.value = 3;
+                          },
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Container(
+                          color: const Color(0xFFFBFBFB),
+                          child: _getPageContent(
+                              controller.selectedNavbarIndex.value)),
+                    )
+                  ],
+                );
+        },
+      ),
+    );
+  }
+
+  Widget mobileViewBottomNavBar() {
+    return BottomNavigationBar(
+      backgroundColor: Colors.white,
+      onTap: (value) {
+        controller.selectedNavbarIndex.value = value;
+      },
+      items: [
+        BottomNavigationBarItem(
+          icon: Assets.images.navbar4.image(
+            height: 44,
+            width: 44,
+          ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: Assets.images.navbar3.image(
+            height: 44,
+            width: 44,
+          ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: Assets.images.navbar2.image(
+            height: 44,
+            width: 44,
+          ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: Assets.images.navbar1.image(
+            height: 44,
+            width: 44,
+          ),
+          label: '',
+        ),
+      ],
     );
   }
 

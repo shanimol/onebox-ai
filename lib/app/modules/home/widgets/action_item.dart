@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:nexus/app/data/models/task.dart';
 import 'package:nexus/gen/assets.gen.dart';
@@ -221,8 +222,8 @@ class ActionItem extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 320,
+        margin: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width / 8,
         ),
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
