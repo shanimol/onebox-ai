@@ -14,7 +14,7 @@ class _MeetingsState extends State<Meetings> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 470,
+      //width: 470,
       height: 310,
       padding: const EdgeInsets.only(
         top: 9,
@@ -69,15 +69,30 @@ class _MeetingsState extends State<Meetings> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'TODAY',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 12,
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.w500,
-              height: 14 / 12,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'TODAY',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w500,
+                  height: 14 / 12,
+                ),
+              ),
+              Text(
+                ' Sept 16, 2024',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w500,
+                  height: 14 / 12,
+                ),
+              )
+            ],
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -108,9 +123,17 @@ class _MeetingsState extends State<Meetings> {
       },
       child: Container(
         padding: const EdgeInsets.all(8),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          border: index == selectedIndex
+              ? Border.all(
+                  color: Color(0xFFD72F59),
+                  width: 2,
+                )
+              : Border.all(
+                  color: Colors.transparent,
+                ),
           borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: Colors.white,
+          color: selectedIndex == index ? Color(0xFFFCF0F3) : Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
