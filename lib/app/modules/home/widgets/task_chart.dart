@@ -144,110 +144,24 @@ class TaskChart extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Positioned(
-                  bottom: 10,
-                  child: Container(
-                    width: 300,
-                    padding: const EdgeInsets.only(
-                      left: 18.0,
-                      right: 18,
-                      top: 56,
-                      bottom: 16,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(22),
-                      border: Border.all(color: const Color(0XFFF0F0F0)),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            blurRadius: 10,
-                            spreadRadius: 2),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                          text: const TextSpan(
-                              text: '12',
-                              style: TextStyle(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.black,
-                                  fontFamily: FontFamily.iBMPlexSans),
-                              children: [
-                                TextSpan(
-                                  text: ' New messages',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.black,
-                                    fontFamily: FontFamily.iBMPlexSans,
-                                  ),
-                                )
-                              ]),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(5, (index) {
+                      return Row(children: [
+                        buildVerticalBar(
+                          totalHeightList[index],
+                          completedHeightList[index],
+                          iconList[index],
                         ),
                         const SizedBox(
-                          height: 9,
-                        ),
-                        const LinearProgressIndicator(
-                          minHeight: 10,
-                          value: 0.5,
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                          backgroundColor: Color(0xFFF0F0F0),
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Color(0xFF695DF0),
-                          ),
+                          width: 8,
                         )
-                      ],
-                    ),
+                      ]);
+                    }),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.only(
-                    left: 16.0,
-                    right: 16,
-                    top: 16,
-                    bottom: 16,
-                  ),
-                  // width: 20,
-                  height: 212, // Adjust height for vertical layout
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(22),
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //       color: Colors.grey.withOpacity(0.3),
-                    //       blurRadius: 10,
-                    //       spreadRadius: 2),
-                    // ],
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: List.generate(5, (index) {
-                            return Row(children: [
-                              buildVerticalBar(
-                                totalHeightList[index],
-                                completedHeightList[index],
-                                iconList[index],
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              )
-                            ]);
-                          }),
-                        ),
-                      ),
-                      // Task completion percentage
-                    ],
-                  ),
-                ),
+                // Task completion percentage
               ],
             ),
           ),
