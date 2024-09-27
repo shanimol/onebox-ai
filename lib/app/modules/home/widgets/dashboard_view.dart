@@ -15,76 +15,79 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Hi Shanimol,',
-                    style: TextStyle(
-                      fontSize: 34,
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 7,
-                  ),
-                  Text(
-                    'Here is an overview on what’s on your work plate today.',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.black.withOpacity(0.56),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TaskCard(
-                              controller: controller,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: Meetings(
-                              controller: controller,
-                            ),
-                          ),
-                        ],
+    return Container(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(25),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Hi Shanimol,',
+                      style: TextStyle(
+                        fontSize: 24,
+                        color: AppColors.black,
+                        fontWeight: FontWeight.w700,
                       ),
-                      const SizedBox(
-                        height: 19,
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    Text(
+                      'Here is an overview on what’s on your work plate today.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.black.withOpacity(0.56),
+                        fontWeight: FontWeight.w500,
                       ),
-                      updates(),
-                    ],
-                  )
-                ],
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TaskCard(
+                                controller: controller,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              child: Meetings(
+                                controller: controller,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 19,
+                        ),
+                        updates(),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-            child: RightDrawer(
-          controller: controller,
-        )
-            // Calendar(
-            //   controller: controller,
-            ),
-      ],
+          Expanded(
+              child: RightDrawer(
+            controller: controller,
+          )
+              // Calendar(
+              //   controller: controller,
+              ),
+        ],
+      ),
     );
   }
 

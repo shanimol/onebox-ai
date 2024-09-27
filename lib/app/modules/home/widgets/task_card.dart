@@ -27,7 +27,7 @@ class TaskCard extends StatelessWidget {
           ),
         ],
       ),
-      height: 310,
+      height: 370,
       child: Card(
         color: Colors.white,
         elevation: 0,

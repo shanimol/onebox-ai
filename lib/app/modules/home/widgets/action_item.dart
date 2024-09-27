@@ -142,22 +142,48 @@ class ActionItem extends StatelessWidget {
   }
 
   Widget _buildMarkAsDone() {
+    // Container(
+    //   padding: const EdgeInsets.symmetric(
+    //     horizontal: 10,
+    //     vertical: 6,
+    //   ),
+    //   decoration: BoxDecoration(
+    //     borderRadius: const BorderRadius.all(
+    //       Radius.circular(7),
+    //     ),
+    //     border: Border.all(
+    //       color: selectedIndex == index
+    //           ? Colors.transparent
+    //           : Colors.black.withOpacity(0.07),
+    //     ),
+    //     color: Colors.white,
+    //   ),
+    //   child: Text(
+    //     buttonTitle ?? '',
+    //     style: const TextStyle(
+    //       fontSize: 14,
+    //       fontWeight: FontWeight.w500,
+    //       color: Color(0XFF181818),
+    //     ),
+    //   ),
+    // ),
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 11,
         vertical: 8.5,
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFF695DF0),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(
           6,
         ),
+        border: Border.all(color: Colors.black.withOpacity(0.07)),
       ),
       child: const Text(
         "Mark as done",
         style: TextStyle(
           fontSize: 14,
-          color: Colors.white,
+          color: Colors.black,
           fontWeight: FontWeight.w500,
           height: 17.07 / 14,
         ),

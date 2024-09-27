@@ -22,7 +22,7 @@ class _MeetingsState extends State<Meetings> {
   Widget build(BuildContext context) {
     return Container(
       //width: 470,
-      height: 310,
+      height: 370,
       padding: const EdgeInsets.only(
         left: 7,
         right: 7,

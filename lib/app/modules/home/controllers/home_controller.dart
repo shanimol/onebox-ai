@@ -64,6 +64,21 @@ class HomeController extends GetxController {
         sourceId: "sid2",
       ),
       Task(
+        id: "id11",
+        title: "Sprint Planning",
+        summary:
+            "Lorem ipsum dolor sit amet consectetur. Malesuada sem vestibulum mi in amet amet libero eget. Sociis aliquam sed id diam non quam purus morbi. Id at gravida aliquet a metus duis eget tincidunt diam. Sit nunc nisl pulvinar sit proin diam massa. Cursus dictum ut tristique integer. Sed id orci tempus a. Et risus blandit dolor rutrum.",
+        date: DateTime.now().subtract(
+          Duration(
+            hours: 2,
+          ),
+        ),
+        status: Status.Pending,
+        priority: 7,
+        sourceType: Source.Gmail,
+        sourceId: "sid2",
+      ),
+      Task(
         id: "id3",
         title: "Reply to mail",
         summary:

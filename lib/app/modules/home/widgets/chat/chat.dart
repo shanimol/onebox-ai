@@ -206,11 +206,14 @@ class SendIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.gray19, // Background color
+        color: AppColors.black, // Background color
         shape: BoxShape.circle, // Circular shape
       ),
       child: IconButton(
-        icon: Icon(Icons.send),
+        icon: Icon(
+          Icons.send,
+          color: Colors.white,
+        ),
         color: Colors.white, onPressed: null, // Icon color
       ),
     );

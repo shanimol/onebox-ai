@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nexus/app/common/event_bus/events.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
-import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/app/data/models/user.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
+import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
 class GmailSummary extends StatelessWidget {
@@ -200,7 +200,7 @@ class GmailSummary extends StatelessWidget {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(8),
                     ),
-                    color: Color(0xFFD72F59),
+                    color: Color(0xFF695DF0),
                   ),
                   height: 36,
                   padding: const EdgeInsets.all(8),
