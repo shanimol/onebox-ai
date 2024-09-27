@@ -1,6 +1,7 @@
 import 'package:nexus/app/data/models/slack.dart';
 import 'package:nexus/app/data/models/task.dart';
 
+import 'chat_response.dart';
 import 'email.dart';
 import 'meeting.dart';
 
@@ -13,6 +14,7 @@ class ClassFactories {
     Meeting: (dynamic x) => Meeting.fromMap(x),
     EmailData: (dynamic x) => EmailData.fromMap(x),
     SlackData: (dynamic x) => SlackData.fromMap(x),
+    ChatResponse: (dynamic x) => ChatResponse.fromJson(x),
   };
 }
 

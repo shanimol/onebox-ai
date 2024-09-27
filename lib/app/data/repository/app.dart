@@ -1,6 +1,5 @@
 // import 'package:dartz/dartz.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
@@ -12,6 +11,7 @@ import '../../common/di/injectable.dart';
 import '../../common/util/utils.dart';
 import '../api/api_client.dart';
 import '../api/api_provider.dart';
+import '../models/chat_response.dart';
 import '../models/configuration.dart';
 import '../models/task.dart' as task;
 
@@ -27,6 +27,7 @@ abstract class IAppRepository {
   Future<Either<dynamic, List<Meeting>>> getMeetings();
   Future<Either<dynamic, EmailData>> getEmails();
   Future<Either<dynamic, SlackData>> getSlackMessages();
+  Future<Either<dynamic, ChatResponse>> getAIChatResponse(String message);
 }
 
 @Injectable(as: IAppRepository, env: [ServiceEnv.app])
@@ -108,6 +109,32 @@ class AppRepository extends IAppRepository {
       final result = await compute(
         Utils.extractClassFromJson<SlackData>,
         response["data"],
+      );
+      return Right(result);
+    } catch (exception) {
+      return Left(exception);
+    }
+  }
+
+  @override
+  Future<Either<dynamic, ChatResponse>> getAIChatResponse(
+      String message) async {
+    dynamic response;
+    try {
+      final encodedMessage = Uri.encodeComponent(message);
+
+      response = await api.post(
+        uri: '$baseUrl/chat',
+        queryParameters: {
+          "data": encodedMessage,
+        },
+        // data: {
+        //   "data": encodedMessage,
+        // },
+      );
+      final result = await compute(
+        Utils.extractClassFromJson<ChatResponse>,
+        response,
       );
       return Right(result);
     } catch (exception) {
