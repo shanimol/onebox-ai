@@ -25,6 +25,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/assign.png
   AssetGenImage get assign => const AssetGenImage('assets/images/assign.png');
 
+  /// File path: assets/images/calendar_home.png
+  AssetGenImage get calendarHome =>
+      const AssetGenImage('assets/images/calendar_home.png');
+
+  /// File path: assets/images/calendar_home_suffix.png
+  AssetGenImage get calendarHomeSuffix =>
+      const AssetGenImage('assets/images/calendar_home_suffix.png');
+
   /// File path: assets/images/confluence.png
   AssetGenImage get confluence =>
       const AssetGenImage('assets/images/confluence.png');
@@ -47,6 +55,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/gmail.png
   AssetGenImage get gmail => const AssetGenImage('assets/images/gmail.png');
 
+  /// File path: assets/images/meet.png
+  AssetGenImage get meet => const AssetGenImage('assets/images/meet.png');
+
   /// File path: assets/images/search.png
   AssetGenImage get search => const AssetGenImage('assets/images/search.png');
 
@@ -68,6 +79,8 @@ class $AssetsImagesGen {
         actionItems,
         add,
         assign,
+        calendarHome,
+        calendarHomeSuffix,
         confluence,
         delete,
         excel,
@@ -75,6 +88,7 @@ class $AssetsImagesGen {
         figma,
         filter,
         gmail,
+        meet,
         search,
         send,
         slack,
