@@ -18,7 +18,11 @@ class TaskCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(19),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(
+            19,
+          ),
+        ),
         boxShadow: [
           BoxShadow(
             color: AppColors.gray32.withOpacity(.2),
@@ -101,7 +105,7 @@ class TaskCard extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(
-                                  12,
+                                  19,
                                 ),
                               ),
                               color: controller.taskCardSectionIndex.value == 0
@@ -170,7 +174,7 @@ class TaskCard extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(
-                                  12,
+                                  19,
                                 ),
                               ),
                               color: controller.taskCardSectionIndex.value == 1

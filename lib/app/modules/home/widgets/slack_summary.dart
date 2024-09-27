@@ -117,39 +117,41 @@ class SlackSummary extends StatelessWidget {
           ),
           Obx(
             () => Expanded(
-              child: Column(
-                children:
-                    List.generate(min(3, controller.slackData.length), (index) {
-                  return Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 10,
-                        ),
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(9),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: List.generate(min(3, controller.slackData.length),
+                      (index) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 10,
+                          ),
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(9),
+                              ),
+                              color: Color(0XFFF0F0F0)),
+                          child: Text(
+                            controller.slackData[index].summary ?? '',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: AppColors.black.withOpacity(0.8),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
                             ),
-                            color: Color(0XFFF0F0F0)),
-                        child: Text(
-                          controller.slackData[index].summary ?? '',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: AppColors.black.withOpacity(0.8),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      )
-                    ],
-                  );
-                }),
+                        const SizedBox(
+                          height: 6,
+                        )
+                      ],
+                    );
+                  }),
+                ),
               ),
             ),
           ),

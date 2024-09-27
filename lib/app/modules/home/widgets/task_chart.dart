@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:nexus/app/common/util/exports.dart';
 import 'package:nexus/app/modules/home/controllers/home_controller.dart';
 import 'package:nexus/gen/assets.gen.dart';
@@ -86,26 +87,28 @@ class TaskChart extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    RichText(
-                      text: TextSpan(
-                          text: '$totalMessageCount',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.black,
-                              fontFamily: FontFamily.iBMPlexSans),
-                          children: [
-                            TextSpan(
-                              text: ' New messages',
-                              style: TextStyle(
-                                fontSize: 16,
+                    Obx(() {
+                      return RichText(
+                        text: TextSpan(
+                            text: '$totalMessageCount',
+                            style: TextStyle(
+                                fontSize: 30,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.black,
-                                fontFamily: FontFamily.iBMPlexSans,
-                              ),
-                            )
-                          ]),
-                    ),
+                                fontFamily: FontFamily.iBMPlexSans),
+                            children: [
+                              TextSpan(
+                                text: ' New messages',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.black,
+                                  fontFamily: FontFamily.iBMPlexSans,
+                                ),
+                              )
+                            ]),
+                      );
+                    }),
                     const SizedBox(
                       height: 9,
                     ),
@@ -211,8 +214,7 @@ class TaskChart extends StatelessWidget {
   }
 
   int get totalMessageCount {
-    return (controller.emaildata.value?.emails?.length ?? 0) +
-        (controller.slackData.value?.messages?.length ?? 0);
+    return (controller.emaildata.length) + (controller.slackData.length);
   }
 }
 

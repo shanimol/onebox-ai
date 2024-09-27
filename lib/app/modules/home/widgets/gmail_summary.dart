@@ -81,18 +81,20 @@ class GmailSummary extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Obx(
-                () => Wrap(
-                  children: List.generate(senderList.length, (index) {
-                    return Text(
-                      '@${senderList[index]?.firstName} ',
-                      style: TextStyle(
-                        color: AppColors.black.withOpacity(0.56),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    );
-                  }),
+              Expanded(
+                child: Obx(
+                  () => Wrap(
+                    children: List.generate(senderList.length, (index) {
+                      return Text(
+                        '@${senderList[index]?.firstName} ',
+                        style: TextStyle(
+                          color: AppColors.black.withOpacity(0.56),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    }),
+                  ),
                 ),
               )
             ],
@@ -124,39 +126,41 @@ class GmailSummary extends StatelessWidget {
           ),
           Obx(
             () => Expanded(
-              child: Column(
-                children:
-                    List.generate(min(3, controller.emaildata.length), (index) {
-                  return Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 10,
-                        ),
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(9),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: List.generate(min(3, controller.emaildata.length),
+                      (index) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 10,
+                          ),
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(9),
+                              ),
+                              color: Color(0XFFF0F0F0)),
+                          child: Text(
+                            controller.emaildata[index].summary ?? '',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: AppColors.black.withOpacity(0.8),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
                             ),
-                            color: Color(0XFFF0F0F0)),
-                        child: Text(
-                          controller.emaildata[index].summary ?? '',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: AppColors.black.withOpacity(0.8),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      )
-                    ],
-                  );
-                }),
+                        const SizedBox(
+                          height: 6,
+                        )
+                      ],
+                    );
+                  }),
+                ),
               ),
             ),
           ),
