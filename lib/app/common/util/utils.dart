@@ -225,12 +225,12 @@ class Utils {
   }
 
 //
-//   static List<T> extractClassListFromJson<T extends JsonParsableClass>(
-//       dynamic response) {
-//     return List<T>.from(response.map(
-//       (json) => ClassFactories.classFactoriesMap[T]!(json),
-//     ));
-//   }
+  static List<T> extractClassListFromJson<T extends JsonParsableClass>(
+      dynamic response) {
+    return List<T>.from(response.map(
+      (json) => ClassFactories.classFactoriesMap[T]!(json),
+    ));
+  }
 //
 //   static Future<void> downloadImagesToCache(
 //       {required List<String> listOfImageUrls}) async {

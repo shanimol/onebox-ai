@@ -1,3 +1,5 @@
+import 'package:collection/collection.dart';
+
 import 'class_factories.dart';
 import 'user.dart';
 
@@ -51,11 +53,11 @@ class Task implements JsonParsableClass {
           json['assigner'] != null ? User.fromMap(json['assigner']) : null,
       date: json['date'] != null ? DateTime.parse(json['date']) : null,
       status: json['status'] != null
-          ? Status.values.firstWhere((e) => e.name == json['status'])
+          ? Status.values.firstWhereOrNull((e) => e.name == json['status'])
           : null,
       priority: json['priority'],
       sourceType: json['sourceType'] != null
-          ? Source.values.firstWhere((e) => e.name == json['sourceType'])
+          ? Source.values.firstWhereOrNull((e) => e.name == json['sourceType'])
           : null,
       sourceId: json['sourceId'],
     );

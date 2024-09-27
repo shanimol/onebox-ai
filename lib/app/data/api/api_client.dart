@@ -35,6 +35,7 @@ class ApiClient {
       //     "errorType": ErrorType.networkError,
       //   };
       // }
+      _api.options.connectTimeout = const Duration(seconds: 20);
       final Response response = await _api.get(
         uri ?? FlavorConfig.instance?.values.baseUrl ?? '',
         queryParameters: queryParameters,

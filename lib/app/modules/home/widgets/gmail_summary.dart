@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nexus/app/common/event_bus/events.dart';
 import 'package:nexus/app/common/values/app_colors.dart';
 import 'package:nexus/app/data/models/user.dart';
@@ -53,12 +56,14 @@ class GmailSummary extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          Text(
-            '${controller.emailList.length} emails',
-            style: const TextStyle(
-              color: AppColors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
+          Obx(
+            () => Text(
+              '${controller.emaildata.value?.emails?.length ?? 0} emails',
+              style: const TextStyle(
+                color: AppColors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           const SizedBox(
@@ -75,17 +80,19 @@ class GmailSummary extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Wrap(
-                children: List.generate(senderList.length, (index) {
-                  return Text(
-                    '@${senderList[index]?.firstName} ',
-                    style: TextStyle(
-                      color: AppColors.black.withOpacity(0.56),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  );
-                }),
+              Obx(
+                () => Wrap(
+                  children: List.generate(senderList.length, (index) {
+                    return Text(
+                      '@${senderList[index]?.firstName} ',
+                      style: TextStyle(
+                        color: AppColors.black.withOpacity(0.56),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    );
+                  }),
+                ),
               )
             ],
           ),
@@ -114,38 +121,43 @@ class GmailSummary extends StatelessWidget {
           const SizedBox(
             height: 6,
           ),
-          Column(
-            children: List.generate(3, (index) {
-              return Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 10,
-                    ),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(9),
+          Obx(
+            () => Column(
+              children: List.generate(
+                  min(3, controller.emaildata.value?.emails?.length ?? 0),
+                  (index) {
+                return Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 10,
+                      ),
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(9),
+                          ),
+                          color: Color(0XFFF0F0F0)),
+                      child: Text(
+                        controller.emaildata.value?.emails?[index].summary ??
+                            '',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: AppColors.black.withOpacity(0.8),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
-                        color: Color(0XFFF0F0F0)),
-                    child: Text(
-                      controller.emailList[index].summary ?? '',
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: AppColors.black.withOpacity(0.8),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  )
-                ],
-              );
-            }),
+                    const SizedBox(
+                      height: 6,
+                    )
+                  ],
+                );
+              }),
+            ),
           ),
           const SizedBox(
             height: 16,
@@ -222,6 +234,10 @@ class GmailSummary extends StatelessWidget {
   }
 
   List<User?> get senderList {
-    return controller.emailList.map((e) => e.sender).toSet().toList();
+    return controller.emaildata.value?.emails
+            ?.map((e) => e.sender)
+            .toSet()
+            .toList() ??
+        [];
   }
 }

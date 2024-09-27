@@ -166,47 +166,65 @@ class Calendar extends StatelessWidget {
                                       vertical: 9,
                                       horizontal: 8,
                                     ),
-                                    color: Colors.black,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    color: Color(0xFFEDECFA),
+                                    child: Row(
                                       children: [
-                                        Text(
-                                          controller.calendarTask[index].task
-                                                  ?.title ??
-                                              '',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            height: 17.07 / 14,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color:
-                                                  Colors.white.withOpacity(0.5),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(999),
-                                          ),
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 10,
-                                            vertical: 3,
-                                          ),
-                                          child: const Text(
-                                            "View Details",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              height: 14.63 / 12,
-                                            ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text(
+                                                controller.calendarTask[index]
+                                                        .task?.title ??
+                                                    '',
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                  height: 17.07 / 14,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  controller.calendarTask[index]
+                                                      .task = null;
+                                                  controller.calendarTask
+                                                      .refresh();
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: Colors.black
+                                                          .withOpacity(0.5),
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            999),
+                                                  ),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 3,
+                                                  ),
+                                                  child: const Text(
+                                                    "Remove Task",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      height: 14.63 / 12,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -229,49 +247,54 @@ class Calendar extends StatelessWidget {
                                             vertical: 9,
                                             horizontal: 8,
                                           ),
-                                          color: Colors.black,
+                                          color: Color(0xFFEDECFA),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
+                                              SizedBox(
+                                                height: 20,
+                                              ),
                                               Text(
                                                 candidateData[0]?.title ?? '',
                                                 style: const TextStyle(
-                                                  color: Colors.white,
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500,
                                                   height: 17.07 / 14,
                                                 ),
                                               ),
-                                              const SizedBox(
-                                                height: 8,
+                                              SizedBox(
+                                                height: 20,
                                               ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Colors.white
-                                                        .withOpacity(0.5),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          999),
-                                                ),
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 3,
-                                                ),
-                                                child: const Text(
-                                                  "View Details",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w500,
-                                                    height: 14.63 / 12,
-                                                  ),
-                                                ),
-                                              ),
+                                              // const SizedBox(
+                                              //   height: 8,
+                                              // ),
+                                              // Container(
+                                              //   decoration: BoxDecoration(
+                                              //     border: Border.all(
+                                              //       color: Colors.white
+                                              //           .withOpacity(0.5),
+                                              //       width: 1,
+                                              //     ),
+                                              //     borderRadius:
+                                              //         BorderRadius.circular(
+                                              //             999),
+                                              //   ),
+                                              //   padding:
+                                              //       const EdgeInsets.symmetric(
+                                              //     horizontal: 10,
+                                              //     vertical: 3,
+                                              //   ),
+                                              //   child: const Text(
+                                              //     "View Details",
+                                              //     style: TextStyle(
+                                              //       color: Colors.white,
+                                              //       fontSize: 12,
+                                              //       fontWeight: FontWeight.w500,
+                                              //       height: 14.63 / 12,
+                                              //     ),
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                         );
