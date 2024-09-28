@@ -50,11 +50,15 @@ class _IntegrationsState extends State<Integrations> {
   @override
   Widget build(BuildContext context) => Scaffold(body: Builder(
         builder: (context) {
+          final isSmallScreen = MediaQuery.of(context).size.width < 600;
           return Scaffold(
             key: _key,
             backgroundColor: AppColors.nexusBg,
+            drawer: ExampleSidebarXForIntegrations(controller: _controller),
             body: Row(
               children: [
+                if (!isSmallScreen)
+                  ExampleSidebarXForIntegrations(controller: _controller),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(45.0),
@@ -67,7 +71,7 @@ class _IntegrationsState extends State<Integrations> {
                           ),
                           title: 'Google',
                           description:
-                              'Send feedback from internal stakeholders or users directly to OneBox.ai',
+                              'Send feedback from internal stakeholders or users directly to Prodigy',
                           isConnected:
                               GoogleSignInApi.googleSignIn.currentUser != null,
                           onConnectPressed: () {},
@@ -80,6 +84,30 @@ class _IntegrationsState extends State<Integrations> {
                             width: 24,
                           ),
                           title: 'Slack',
+                          description:
+                              'Send feedback from internal stakeholders or users directly to Prodigy',
+                          isConnected: false,
+                          onConnectPressed: () {},
+                        ),
+                        SizedBox(height: 24),
+                        IntegrationCard(
+                          icon: Assets.images.logo4.image(
+                            height: 24,
+                            width: 24,
+                          ),
+                          title: 'Figma',
+                          description:
+                              'Send feedback from internal stakeholders or users directly to OneBox.ai',
+                          isConnected: false,
+                          onConnectPressed: () {},
+                        ),
+                        SizedBox(height: 24),
+                        IntegrationCard(
+                          icon: Assets.images.logo2.image(
+                            height: 24,
+                            width: 24,
+                          ),
+                          title: 'Jira',
                           description:
                               'Send feedback from internal stakeholders or users directly to OneBox.ai',
                           isConnected: false,
