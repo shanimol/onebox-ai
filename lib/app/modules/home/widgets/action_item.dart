@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:nexus/app/data/models/task.dart';
+import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
 class ActionItem extends StatelessWidget {
@@ -494,9 +495,22 @@ class ActionItem extends StatelessWidget {
                 const SizedBox(
                   width: 11,
                 ),
-                Assets.images.send.image(
-                  width: 16,
-                  height: 16,
+                AnimatedTap(
+                  onTap: () {
+                    Fluttertoast.showToast(
+                        msg: "Reply sent",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    Navigator.of(context).pop();
+                  },
+                  child: Assets.images.send.image(
+                    width: 16,
+                    height: 16,
+                  ),
                 )
               ],
             ),

@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:google_sign_in_web/web_only.dart' as web;
-import 'package:nexus/app/common/values/app_colors.dart';
-import 'package:nexus/app/widgets/common/animated_filled_button.dart';
 import 'package:nexus/app/widgets/common/animated_tap.dart';
 import 'package:nexus/gen/assets.gen.dart';
 
@@ -37,7 +35,7 @@ class _LoginViewState extends State<LoginView> {
           fontSize: 16.0);
       Get.offNamed(Routes.HOME);
     });
-    GoogleSignInApi.googleSignIn.signInSilently();
+    // GoogleSignInApi.googleSignIn.signInSilently();
   }
 
   @override
@@ -203,7 +201,11 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
         Expanded(
-            flex: 2, child: Assets.images.loginImage.image(fit: BoxFit.fill))
+            flex: 2,
+            child: Assets.images.loginImage.image(
+              fit: BoxFit.fill,
+              height: MediaQuery.of(context).size.height,
+            )),
       ],
     ));
   }

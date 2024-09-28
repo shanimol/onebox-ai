@@ -7,6 +7,7 @@ import 'package:sidebarx/sidebarx.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../common/values/app_colors.dart';
+import '../../../widgets/shimmer.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/chat/chat.dart';
 import '../widgets/integrations/integrations.dart';
@@ -16,160 +17,168 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        leading: Padding(
-          padding: const EdgeInsets.only(
-            left: 16,
-            top: 8,
-            bottom: 8,
-          ),
-          child: Assets.images.logoViolet.image(
-            height: 40,
-            width: 40,
-          ),
-        ),
-        title: Row(
-          children: [
-            Text(
-              'OneBox.ai',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: AppColors.black,
-              ),
+        appBar: AppBar(
+          backgroundColor: AppColors.white,
+          leading: Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+              top: 8,
+              bottom: 8,
             ),
-          ],
+            child: Assets.images.logoViolet.image(
+              height: 40,
+              width: 40,
+            ),
+          ),
+          title: Row(
+            children: [
+              Text(
+                'OneBox.ai',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
+                ),
+              ),
+            ],
+          ),
+          centerTitle: false,
         ),
-        centerTitle: false,
-      ),
-      body: Obx(
-        () {
-          return MediaQuery.of(context).size.width <= 800
-              ? Column(
-                  children: [
-                    Expanded(
-                      child: Container(
-                          color: const Color(0xFFFBFBFB),
-                          child: _getPageContent(
-                              controller.selectedNavbarIndex.value)),
-                    ),
-                    mobileViewBottomNavBar(),
-                  ],
-                )
-              : Row(
-                  children: [
-                    // SidebarX for navigation
-                    SidebarX(
-                      controller: controller.sideBarController,
-                      showToggleButton: false,
-                      footerItems: [
-                        SidebarXItem(
-                          iconBuilder: (selected, hovered) {
-                            return Container(
-                              height: 44,
-                              width: 44,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
+        body: Obx(
+          () => ShimmerTransition(
+            isLoading: controller.isLoading.value == true,
+            shimmer: DealsShimmeringLoadView(),
+            view: Obx(
+              () {
+                return MediaQuery.of(context).size.width <= 800
+                    ? Column(
+                        children: [
+                          Expanded(
+                            child: Container(
+                                color: const Color(0xFFFBFBFB),
+                                child: _getPageContent(
+                                    controller.selectedNavbarIndex.value)),
+                          ),
+                          mobileViewBottomNavBar(),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          // SidebarX for navigation
+                          SidebarX(
+                            controller: controller.sideBarController,
+                            showToggleButton: false,
+                            footerItems: [
+                              SidebarXItem(
+                                iconBuilder: (selected, hovered) {
+                                  return Container(
+                                    height: 44,
+                                    width: 44,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: ClipOval(
+                                      child: Image.network(
+                                        GoogleSignInApi.googleSignIn.currentUser
+                                                ?.photoUrl ??
+                                            Assets.images.profile.path,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                //label: 'Home',
+                                onTap: () {
+                                  controller.selectedNavbarIndex.value = 0;
+                                },
                               ),
-                              child: ClipOval(
-                                child: Image.network(
-                                  GoogleSignInApi
-                                          .googleSignIn.currentUser?.photoUrl ??
-                                      Assets.images.profile.path,
+                            ],
+                            theme: SidebarXTheme(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border(
+                                  right: BorderSide(
+                                    color: Colors.black.withOpacity(
+                                      0.1,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            );
-                          },
-                          //label: 'Home',
-                          onTap: () {
-                            controller.selectedNavbarIndex.value = 0;
-                          },
-                        ),
-                      ],
-                      theme: SidebarXTheme(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border(
-                            right: BorderSide(
-                              color: Colors.black.withOpacity(
-                                0.1,
+                              selectedItemDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Color(0xFFEDECFA),
                               ),
                             ),
+                            items: [
+                              SidebarXItem(
+                                iconBuilder: (selected, hovered) {
+                                  return Assets.images.navbar4.image(
+                                    height: 44,
+                                    width: 44,
+                                    color: selected
+                                        ? Color(0xFF695DF0)
+                                        : Colors.black,
+                                  );
+                                },
+                                //label: 'Home',
+                                onTap: () {
+                                  controller.selectedNavbarIndex.value = 0;
+                                },
+                              ),
+                              SidebarXItem(
+                                iconBuilder: (selected, hovered) {
+                                  return Assets.images.navbar2.image(
+                                    height: 44,
+                                    width: 44,
+                                    color: selected
+                                        ? Color(0xFF695DF0)
+                                        : Colors.black,
+                                  );
+                                },
+                                onTap: () {
+                                  controller.selectedNavbarIndex.value = 1;
+                                },
+                              ),
+                              SidebarXItem(
+                                iconBuilder: (selected, hovered) {
+                                  return Assets.images.navbar3.image(
+                                    height: 44,
+                                    width: 44,
+                                    color: selected
+                                        ? Color(0xFF695DF0)
+                                        : Colors.black,
+                                  );
+                                },
+                                onTap: () {
+                                  controller.selectedNavbarIndex.value = 2;
+                                },
+                              ),
+                              // SidebarXItem(
+                              //   iconBuilder: (selected, hovered) {
+                              //     return Assets.images.navbar1.image(
+                              //       height: 44,
+                              //       width: 44,
+                              //       color:
+                              //           selected ? Color(0xFF695DF0) : Colors.black,
+                              //     );
+                              //   },
+                              //   onTap: () {
+                              //     controller.selectedNavbarIndex.value = 3;
+                              //   },
+                              // ),
+                            ],
                           ),
-                        ),
-                        selectedItemDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color(0xFFEDECFA),
-                        ),
-                      ),
-                      items: [
-                        SidebarXItem(
-                          iconBuilder: (selected, hovered) {
-                            return Assets.images.navbar4.image(
-                              height: 44,
-                              width: 44,
-                              color:
-                                  selected ? Color(0xFF695DF0) : Colors.black,
-                            );
-                          },
-                          //label: 'Home',
-                          onTap: () {
-                            controller.selectedNavbarIndex.value = 0;
-                          },
-                        ),
-                        SidebarXItem(
-                          iconBuilder: (selected, hovered) {
-                            return Assets.images.navbar2.image(
-                              height: 44,
-                              width: 44,
-                              color:
-                                  selected ? Color(0xFF695DF0) : Colors.black,
-                            );
-                          },
-                          onTap: () {
-                            controller.selectedNavbarIndex.value = 1;
-                          },
-                        ),
-                        SidebarXItem(
-                          iconBuilder: (selected, hovered) {
-                            return Assets.images.navbar3.image(
-                              height: 44,
-                              width: 44,
-                              color:
-                                  selected ? Color(0xFF695DF0) : Colors.black,
-                            );
-                          },
-                          onTap: () {
-                            controller.selectedNavbarIndex.value = 2;
-                          },
-                        ),
-                        // SidebarXItem(
-                        //   iconBuilder: (selected, hovered) {
-                        //     return Assets.images.navbar1.image(
-                        //       height: 44,
-                        //       width: 44,
-                        //       color:
-                        //           selected ? Color(0xFF695DF0) : Colors.black,
-                        //     );
-                        //   },
-                        //   onTap: () {
-                        //     controller.selectedNavbarIndex.value = 3;
-                        //   },
-                        // ),
-                      ],
-                    ),
-                    Expanded(
-                      child: Container(
-                          color: const Color(0xFFFBFBFB),
-                          child: _getPageContent(
-                              controller.selectedNavbarIndex.value)),
-                    )
-                  ],
-                );
-        },
-      ),
-    );
+                          Expanded(
+                            child: Container(
+                                color: const Color(0xFFFBFBFB),
+                                child: _getPageContent(
+                                    controller.selectedNavbarIndex.value)),
+                          )
+                        ],
+                      );
+              },
+            ),
+          ),
+        ));
   }
 
   Widget mobileViewBottomNavBar() {

@@ -265,7 +265,7 @@ class _MeetingsState extends State<Meetings> {
               onTap: () {
                 eventBus.fire(ChatEvent(
                     message:
-                        'Summarize all my chat communications received in the last 24 hrs.'));
+                        'Prepare me for the meeting "${upcomingMeetingsList[index].name}"'));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(

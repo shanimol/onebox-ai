@@ -13,9 +13,12 @@ class SplashView extends GetView<SplashController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Assets.images.logoViolet.image(
-          height: 150,
-          width: 150,
+        child: RotationTransition(
+          turns: controller.controller,
+          child: Assets.images.logoViolet.image(
+            height: 150,
+            width: 150,
+          ),
         ),
       ),
     );

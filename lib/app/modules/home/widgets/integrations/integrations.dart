@@ -44,7 +44,7 @@ class _IntegrationsState extends State<Integrations> {
           textColor: Colors.white,
           fontSize: 16.0);
     });
-    GoogleSignInApi.googleSignIn.signInSilently();
+    // GoogleSignInApi.googleSignIn.signInSilently();
   }
 
   @override
@@ -72,9 +72,10 @@ class _IntegrationsState extends State<Integrations> {
                           title: 'Google',
                           description:
                               'Send feedback from internal stakeholders or users directly to Prodigy',
-                          isConnected: false,
+                          isConnected:
+                              GoogleSignInApi.googleSignIn.currentUser != null,
                           onConnectPressed: () {},
-                          isGoogle: true,
+                          isGoogle: false,
                         ),
                         SizedBox(height: 24),
                         IntegrationCard(

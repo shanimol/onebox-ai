@@ -261,5 +261,5 @@ class TaskCard extends StatelessWidget {
   }
 
   List<Task> get priortyTasks =>
-      controller.tasks.where((e) => (e.priority ?? 0) > 6).toList();
+      controller.tasks.where((e) => (e.priority ?? 0) < 4).toList();
 }

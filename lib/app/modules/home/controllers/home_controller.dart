@@ -17,7 +17,7 @@ class HomeController extends GetxController {
       SidebarXController(selectedIndex: 0, extended: true);
   final RxInt selectedNavbarIndex = 0.obs;
   final RxInt taskCardSectionIndex = 0.obs;
-  
+
   HomeController({required this.repository});
 
   final count = 0.obs;
@@ -32,6 +32,8 @@ class HomeController extends GetxController {
   RxList<Email> emaildata = RxList<Email>();
 
   RxList<Slack> slackData = RxList<Slack>();
+
+  RxBool isLoading = true.obs;
 
   @override
   void onInit() async {
@@ -59,6 +61,8 @@ class HomeController extends GetxController {
         );
       },
     );
+
+    isLoading.value = false;
   }
 
   Future<void> fetchData() async {
@@ -98,14 +102,14 @@ class HomeController extends GetxController {
   Future<void> setEmails() async {
     try {
       var response = await repository.getEmails();
-      emaildata.value = response.getRight()?? [];
+      emaildata.value = response.getRight() ?? [];
     } catch (e) {}
   }
 
   Future<void> setSlackMessages() async {
     try {
       var response = await repository.getSlackMessages();
-      slackData.value = response.getRight()?? [];
+      slackData.value = response.getRight() ?? [];
     } catch (e) {}
   }
 }
