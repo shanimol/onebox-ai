@@ -149,7 +149,7 @@ class AppRepository extends IAppRepository {
     try {
       var response = await api.post(
         uri: '$baseUrl/task/status',
-        data: {"task_id": '"$id"', "status": '"COMPLETED"'},
+        data: {"task_id": id, "status": "COMPLETED"},
       );
       return const Right(OperationStatus.Success);
     } catch (exception) {
