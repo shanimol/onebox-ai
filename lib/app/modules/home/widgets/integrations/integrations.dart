@@ -85,6 +85,30 @@ class _IntegrationsState extends State<Integrations> {
                           isConnected: false,
                           onConnectPressed: () {},
                         ),
+                        SizedBox(height: 24),
+                        IntegrationCard(
+                          icon: Assets.images.logo4.image(
+                            height: 24,
+                            width: 24,
+                          ),
+                          title: 'Figma',
+                          description:
+                              'Send feedback from internal stakeholders or users directly to OneBox.ai',
+                          isConnected: false,
+                          onConnectPressed: () {},
+                        ),
+                        SizedBox(height: 24),
+                        IntegrationCard(
+                          icon: Assets.images.logo2.image(
+                            height: 24,
+                            width: 24,
+                          ),
+                          title: 'Jira',
+                          description:
+                              'Send feedback from internal stakeholders or users directly to OneBox.ai',
+                          isConnected: false,
+                          onConnectPressed: () {},
+                        ),
                         // Add more IntegrationCard instances as needed
                       ],
                     ),
