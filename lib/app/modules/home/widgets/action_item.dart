@@ -148,7 +148,10 @@ class ActionItem extends StatelessWidget {
     }
   }
 
-  Widget _buildMarkAsDone() {
+  Widget _buildMarkAsDone({
+    bool shouldPopDialog = false,
+    BuildContext? context,
+  }) {
     // Container(
     //   padding: const EdgeInsets.symmetric(
     //     horizontal: 10,
@@ -179,6 +182,9 @@ class ActionItem extends StatelessWidget {
         onMarkTaskDone(
           task?.id ?? '',
         );
+        if (context != null && shouldPopDialog) {
+          Navigator.of(context).pop();
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -424,7 +430,7 @@ class ActionItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "James 1:06 PM, sept 12 (IST)",
+                      "James 1:06 PM, sept ${DateTime.now().day} (IST)",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -460,7 +466,7 @@ class ActionItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Tom 1:11 PM, sept 12 (IST)",
+                      "Tom 1:11 PM, sept ${DateTime.now().day} (IST)",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -536,7 +542,10 @@ class ActionItem extends StatelessWidget {
                 const SizedBox(
                   width: 16,
                 ),
-                _buildMarkAsDone(),
+                _buildMarkAsDone(
+                  context: context,
+                  shouldPopDialog: true,
+                ),
               ],
             ),
           ],

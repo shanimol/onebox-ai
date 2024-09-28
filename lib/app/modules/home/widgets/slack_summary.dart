@@ -217,7 +217,7 @@ class SlackSummary extends StatelessWidget {
                   height: 36,
                   padding: const EdgeInsets.all(8),
                   child: const Text(
-                    'View details',
+                    'Summarize',
                     style: TextStyle(
                       color: AppColors.white,
                       fontSize: 14,
