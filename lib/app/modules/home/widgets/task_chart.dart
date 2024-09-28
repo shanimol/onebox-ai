@@ -189,7 +189,7 @@ class TaskChart extends StatelessWidget {
                 completedHeight, // Scale the height based on percentage
             width: 40,
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 231, 230, 230),
+              color: Color.fromARGB(255, 249, 247, 247),
             ),
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -205,7 +205,7 @@ class TaskChart extends StatelessWidget {
           height: completedHeight, // Set a fixed height for background
           width: 40,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Color(0xFF695DF0),
             borderRadius: BorderRadius.circular(8),
           ),
         ),
