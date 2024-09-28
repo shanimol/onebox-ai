@@ -187,9 +187,14 @@ class AppRepository extends IAppRepository {
     try {
       await api.post(
         uri: '$baseUrl/calendar/',
-        data: [
-          {"task_id": taskId, "time": date.toIso8601String()}
-        ],
+        data: {
+          "data": [
+            {
+              "task_id": taskId,
+              "time": date.toIso8601String(),
+            },
+          ]
+        },
       );
 
       return const Right(OperationStatus.Success);
