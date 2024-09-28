@@ -430,7 +430,7 @@ class ActionItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "James 1:06 PM, sept 12 (IST)",
+                      "James 1:06 PM, sept ${DateTime.now().day} (IST)",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -466,7 +466,7 @@ class ActionItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Tom 1:11 PM, sept 12 (IST)",
+                      "Tom 1:11 PM, sept ${DateTime.now().day} (IST)",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
