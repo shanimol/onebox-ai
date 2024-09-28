@@ -31,6 +31,10 @@ abstract class IAppRepository {
   Future<Either<dynamic, List<Slack>>> getSlackMessages();
   Future<Either<dynamic, OperationStatus>> markTaskDone(String id);
   Future<Either<dynamic, List<CalendarTaskId>>> getCalendarTaskList();
+  Future<Either<dynamic, OperationStatus>> setCalendarTask(
+    String? taskId,
+    DateTime date,
+  );
 }
 
 @Injectable(as: IAppRepository, env: [ServiceEnv.app])
@@ -148,7 +152,7 @@ class AppRepository extends IAppRepository {
   @override
   Future<Either<dynamic, OperationStatus>> markTaskDone(String id) async {
     try {
-      var response = await api.post(
+      await api.post(
         uri: '$baseUrl/task/status',
         data: {"task_id": id, "status": "COMPLETED"},
       );
@@ -157,7 +161,7 @@ class AppRepository extends IAppRepository {
       return Left(exception);
     }
   }
-  
+
   @override
   Future<Either<dynamic, List<CalendarTaskId>>> getCalendarTaskList() async {
     dynamic response;
@@ -170,6 +174,25 @@ class AppRepository extends IAppRepository {
         response["data"],
       );
       return Right(result);
+    } catch (exception) {
+      return Left(exception);
+    }
+  }
+
+  @override
+  Future<Either<dynamic, OperationStatus>> setCalendarTask(
+    String? taskId,
+    DateTime date,
+  ) async {
+    try {
+      await api.post(
+        uri: '$baseUrl/calendar/',
+        data: [
+          {"task_id": taskId, "time": date.toIso8601String()}
+        ],
+      );
+
+      return const Right(OperationStatus.Success);
     } catch (exception) {
       return Left(exception);
     }

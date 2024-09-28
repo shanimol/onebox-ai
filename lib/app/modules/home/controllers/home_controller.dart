@@ -149,4 +149,17 @@ class HomeController extends GetxController {
       }
     } catch (e) {}
   }
+
+  Future<void> setTaskForCalendar(int index) async {
+    var calendarTaskItem = calendarTask[index];
+    repository.setCalendarTask(
+      calendarTaskItem.task?.id,
+      calendarTaskItem.date ??
+          DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          ),
+    );
+  }
 }

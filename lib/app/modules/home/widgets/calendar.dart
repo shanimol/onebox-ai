@@ -243,6 +243,10 @@ class Calendar extends StatelessWidget {
                                       controller.calendarTask[index].task =
                                           details.data;
                                       controller.calendarTask.refresh();
+                                      controller.setTaskForCalendar(
+                                        
+                                        index,
+                                      );
                                     },
                                     builder: (
                                       BuildContext context,
