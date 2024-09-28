@@ -7,10 +7,14 @@ import 'package:nexus/gen/assets.gen.dart';
 
 class ActionItem extends StatelessWidget {
   final Task? task;
+  final Source? source;
+  final void Function(String) onMarkTaskDone;
 
   const ActionItem({
     super.key,
     required this.task,
+    required this.source,
+    required this.onMarkTaskDone,
   });
 
   @override
@@ -46,7 +50,7 @@ class ActionItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    task?.content ?? '',
+                    task?.senderName ?? '',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -74,44 +78,45 @@ class ActionItem extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    Assets.images.search.image(
-                      height: 20,
-                      width: 20,
-                    ),
-                    const SizedBox(
-                      width: 13,
-                    ),
-                    Assets.images.assign.image(
-                      height: 20,
-                      width: 20,
-                    ),
-                    const SizedBox(
-                      width: 13,
-                    ),
-                    Assets.images.delete.image(
-                      height: 20,
-                      width: 20,
-                    ),
-                    // const SizedBox(
-                    //   width: 13,
-                    // ),
-                    // Assets.images.tick.image(
-                    //   height: 20,
-                    //   width: 20,
-                    // ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                _buildMarkAsDone(),
-              ],
-            ),
+            if (task?.status == Status.PENDING)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
+                    children: [
+                      Assets.images.search.image(
+                        height: 20,
+                        width: 20,
+                      ),
+                      const SizedBox(
+                        width: 13,
+                      ),
+                      Assets.images.assign.image(
+                        height: 20,
+                        width: 20,
+                      ),
+                      const SizedBox(
+                        width: 13,
+                      ),
+                      Assets.images.delete.image(
+                        height: 20,
+                        width: 20,
+                      ),
+                      // const SizedBox(
+                      //   width: 13,
+                      // ),
+                      // Assets.images.tick.image(
+                      //   height: 20,
+                      //   width: 20,
+                      // ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  _buildMarkAsDone(),
+                ],
+              ),
           ],
         ),
       ),
@@ -119,7 +124,7 @@ class ActionItem extends StatelessWidget {
   }
 
   Widget _buildSourceIcon() {
-    switch (task?.sourceType) {
+    switch (source) {
       case Source.Slack:
         return Assets.images.slack.image(
           height: 37,
@@ -169,25 +174,32 @@ class ActionItem extends StatelessWidget {
     //     ),
     //   ),
     // ),
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 11,
-        vertical: 8.5,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(
-          6,
+    return GestureDetector(
+      onTap: () {
+        onMarkTaskDone(
+          task?.id ?? '',
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 11,
+          vertical: 8.5,
         ),
-        border: Border.all(color: Colors.black.withOpacity(0.07)),
-      ),
-      child: const Text(
-        "Mark as done",
-        style: TextStyle(
-          fontSize: 14,
-          color: Colors.black,
-          fontWeight: FontWeight.w500,
-          height: 17.07 / 14,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(
+            6,
+          ),
+          border: Border.all(color: Colors.black.withOpacity(0.07)),
+        ),
+        child: const Text(
+          "Mark as done",
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            height: 17.07 / 14,
+          ),
         ),
       ),
     );
@@ -296,7 +308,7 @@ class ActionItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        task?.content ?? '',
+                        task?.senderName ?? '',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

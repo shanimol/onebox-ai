@@ -214,15 +214,15 @@ class _MeetingsState extends State<Meetings> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Assets.images.logo.image(
-              height: 42,
-              width: 42,
-            ),
+            // Assets.images.logo.image(
+            //   height: 42,
+            //   width: 42,
+            // ),
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(width: 11),
+                  // const SizedBox(width: 11),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,

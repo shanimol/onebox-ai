@@ -112,4 +112,19 @@ class HomeController extends GetxController {
       slackData.value = response.getRight() ?? [];
     } catch (e) {}
   }
+
+  Future<void> markTaskDone(String taskId) async {
+    try {
+      var response = await repository.markTaskDone(
+        taskId,
+      );
+      if (response.isRight()) {
+        var index = tasks.indexWhere(
+          (Task element) => element.id == taskId,
+        );
+        tasks[index].status = Status.COMPLETED;
+        tasks.refresh();
+      }
+    } catch (e) {}
+  }
 }

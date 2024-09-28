@@ -183,13 +183,82 @@ class TaskCard extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                '${controller.tasks.length}',
+                                '${allTasks.length}',
                                 style: TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
                                   height: 20.3 / 14,
                                   color:
                                       controller.taskCardSectionIndex.value == 1
+                                          ? Colors.white
+                                          : const Color(0xFF344054),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 3,
+                  ),
+                  AnimatedTap(
+                    onTap: () {
+                      controller.taskCardSectionIndex.value = 2;
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: controller.taskCardSectionIndex.value == 2
+                                ? const Color(0xFF695DF0)
+                                : const Color(0xFFF0F2F5),
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Completed',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              height: 20.3 / 14,
+                              color: controller.taskCardSectionIndex.value == 2
+                                  ? const Color(0xFF695DF0)
+                                  : const Color(0xFF344054),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Container(
+                            height: 17,
+                            width: 24,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(
+                                  19,
+                                ),
+                              ),
+                              color: controller.taskCardSectionIndex.value == 2
+                                  ? const Color(0xFF695DF0)
+                                  : const Color(0xFFF0F2F5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${getCompletedTask.length}',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  height: 20.3 / 14,
+                                  color:
+                                      controller.taskCardSectionIndex.value == 2
                                           ? Colors.white
                                           : const Color(0xFF344054),
                                 ),
@@ -224,15 +293,34 @@ class TaskCard extends StatelessWidget {
                       itemBuilder: (context, index) {
                         var task = controller.taskCardSectionIndex.value == 0
                             ? priortyTasks[index]
-                            : controller.tasks[index];
+                            : controller.taskCardSectionIndex.value == 1
+                                ? allTasks[index]
+                                : getCompletedTask[index];
+                        if (task.status == Status.COMPLETED) {
+                          return ActionItem(
+                            task: task,
+                            source: getSourceForTask(task),
+                            onMarkTaskDone: (id) {
+                              controller.markTaskDone(
+                                id,
+                              );
+                            },
+                          );
+                        }
                         return Draggable<Task>(
                           data: task,
                           childWhenDragging: ActionItem(
                             task: task,
+                            source: getSourceForTask(task),
+                            onMarkTaskDone: (id) {
+                              controller.markTaskDone(
+                                id,
+                              );
+                            },
                           ),
                           feedback: Material(
                             child: DraggingActionItem(
-                              title: task.content,
+                              title: task.senderName,
                               summary: task.content,
                               actionId: task.id,
                               source: task.sourceType,
@@ -240,6 +328,12 @@ class TaskCard extends StatelessWidget {
                           ),
                           child: ActionItem(
                             task: task,
+                            source: getSourceForTask(task),
+                            onMarkTaskDone: (id) {
+                              controller.markTaskDone(
+                                id,
+                              );
+                            },
                           ),
                         );
                       },
@@ -248,7 +342,9 @@ class TaskCard extends StatelessWidget {
                       },
                       itemCount: controller.taskCardSectionIndex.value == 0
                           ? priortyTasks.length
-                          : controller.tasks.length,
+                          : controller.taskCardSectionIndex.value == 1
+                              ? allTasks.length
+                              : getCompletedTask.length,
                     );
                   },
                 ),
@@ -260,6 +356,21 @@ class TaskCard extends StatelessWidget {
     );
   }
 
-  List<Task> get priortyTasks =>
-      controller.tasks.where((e) => (e.priority ?? 0) < 4).toList();
+  List<Task> get priortyTasks => controller.tasks
+      .where((e) => e.status == Status.PENDING && (e.priority ?? 0) < 4)
+      .toList();
+
+  List<Task> get allTasks =>
+      controller.tasks.where((e) => e.status == Status.PENDING).toList();
+
+  List<Task> get getCompletedTask =>
+      controller.tasks.where((e) => e.status == Status.COMPLETED).toList();
+
+  Source getSourceForTask(Task task) {
+    if (controller.emaildata.any((element) => element.id == task.sourceId)) {
+      return Source.Gmail;
+    } else {
+      return Source.Slack;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:injectable/injectable.dart';
+import 'package:nexus/app/data/models/calendar_task_id.dart';
 import 'package:nexus/app/data/models/email.dart';
 import 'package:nexus/app/data/models/meeting.dart';
 import 'package:nexus/app/data/models/slack.dart';
@@ -28,6 +29,7 @@ abstract class IAppRepository {
   Future<Either<dynamic, ChatResponse>> getAIChatResponse(String message);
   Future<Either<dynamic, List<Email>>> getEmails();
   Future<Either<dynamic, List<Slack>>> getSlackMessages();
+  Future<Either<dynamic, OperationStatus>> markTaskDone(String id);
 }
 
 @Injectable(as: IAppRepository, env: [ServiceEnv.app])
@@ -137,6 +139,19 @@ class AppRepository extends IAppRepository {
         response,
       );
       return Right(result);
+    } catch (exception) {
+      return Left(exception);
+    }
+  }
+
+  @override
+  Future<Either<dynamic, OperationStatus>> markTaskDone(String id) async {
+    try {
+      var response = await api.post(
+        uri: '$baseUrl/task/status',
+        data: {"task_id": '"$id"', "status": "COMPLETED"},
+      );
+      return const Right(OperationStatus.Success);
     } catch (exception) {
       return Left(exception);
     }

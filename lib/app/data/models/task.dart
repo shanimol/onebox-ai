@@ -3,7 +3,7 @@ import 'package:collection/collection.dart';
 import 'class_factories.dart';
 import 'user.dart';
 
-enum Status { Pending, Done }
+enum Status { PENDING, COMPLETED }
 
 enum Source { Slack, Gmail, Meet }
 
@@ -17,6 +17,7 @@ class Task implements JsonParsableClass {
   int? priority;
   Source? sourceType;
   String? sourceId;
+  String? senderName;
 
   Task({
     this.id,
@@ -28,6 +29,7 @@ class Task implements JsonParsableClass {
     this.priority,
     this.sourceType,
     this.sourceId,
+    this.senderName,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,6 +43,7 @@ class Task implements JsonParsableClass {
       'priority': priority,
       'sourceType': sourceType?.toString().split('.').last,
       'sourceId': sourceId,
+      'senderName': senderName,
     };
   }
 
@@ -59,7 +62,8 @@ class Task implements JsonParsableClass {
       sourceType: json['sourceType'] != null
           ? Source.values.firstWhereOrNull((e) => e.name == json['sourceType'])
           : null,
-      sourceId: json['sourceId'],
+      sourceId: json['source_id'],
+      senderName: json['sender_name'],
     );
   }
 }
