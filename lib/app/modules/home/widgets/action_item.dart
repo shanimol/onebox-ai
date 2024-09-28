@@ -148,7 +148,10 @@ class ActionItem extends StatelessWidget {
     }
   }
 
-  Widget _buildMarkAsDone() {
+  Widget _buildMarkAsDone({
+    bool shouldPopDialog = false,
+    BuildContext? context,
+  }) {
     // Container(
     //   padding: const EdgeInsets.symmetric(
     //     horizontal: 10,
@@ -179,6 +182,9 @@ class ActionItem extends StatelessWidget {
         onMarkTaskDone(
           task?.id ?? '',
         );
+        if (context != null && shouldPopDialog) {
+          Navigator.of(context).pop();
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(
@@ -536,7 +542,10 @@ class ActionItem extends StatelessWidget {
                 const SizedBox(
                   width: 16,
                 ),
-                _buildMarkAsDone(),
+                _buildMarkAsDone(
+                  context: context,
+                  shouldPopDialog: true,
+                ),
               ],
             ),
           ],
