@@ -50,15 +50,11 @@ class _IntegrationsState extends State<Integrations> {
   @override
   Widget build(BuildContext context) => Scaffold(body: Builder(
         builder: (context) {
-          final isSmallScreen = MediaQuery.of(context).size.width < 600;
           return Scaffold(
             key: _key,
             backgroundColor: AppColors.nexusBg,
-            drawer: ExampleSidebarXForIntegrations(controller: _controller),
             body: Row(
               children: [
-                if (!isSmallScreen)
-                  ExampleSidebarXForIntegrations(controller: _controller),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(45.0),
@@ -71,7 +67,7 @@ class _IntegrationsState extends State<Integrations> {
                           ),
                           title: 'Google',
                           description:
-                              'Send feedback from internal stakeholders or users directly to Prodigy',
+                              'Send feedback from internal stakeholders or users directly to OneBox.ai',
                           isConnected:
                               GoogleSignInApi.googleSignIn.currentUser != null,
                           onConnectPressed: () {},
@@ -85,7 +81,7 @@ class _IntegrationsState extends State<Integrations> {
                           ),
                           title: 'Slack',
                           description:
-                              'Send feedback from internal stakeholders or users directly to Prodigy',
+                              'Send feedback from internal stakeholders or users directly to OneBox.ai',
                           isConnected: false,
                           onConnectPressed: () {},
                         ),
