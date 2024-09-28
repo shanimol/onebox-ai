@@ -82,7 +82,7 @@ class Calendar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Tuesday",
+                  "Saturday",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -95,7 +95,7 @@ class Calendar extends StatelessWidget {
                 Row(
                   children: [
                     const Text(
-                      "September 24,2024",
+                      "September 28,2024",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

@@ -30,6 +30,7 @@ abstract class IAppRepository {
   Future<Either<dynamic, List<Email>>> getEmails();
   Future<Either<dynamic, List<Slack>>> getSlackMessages();
   Future<Either<dynamic, OperationStatus>> markTaskDone(String id);
+  Future<Either<dynamic, List<CalendarTaskId>>> getCalendarTaskList();
 }
 
 @Injectable(as: IAppRepository, env: [ServiceEnv.app])
@@ -152,6 +153,23 @@ class AppRepository extends IAppRepository {
         data: {"task_id": id, "status": "COMPLETED"},
       );
       return const Right(OperationStatus.Success);
+    } catch (exception) {
+      return Left(exception);
+    }
+  }
+  
+  @override
+  Future<Either<dynamic, List<CalendarTaskId>>> getCalendarTaskList() async {
+    dynamic response;
+    try {
+      response = await api.get(
+        uri: '$baseUrl/calendar/',
+      );
+      final result = await compute(
+        Utils.extractClassListFromJson<CalendarTaskId>,
+        response["data"],
+      );
+      return Right(result);
     } catch (exception) {
       return Left(exception);
     }

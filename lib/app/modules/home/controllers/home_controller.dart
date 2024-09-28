@@ -38,16 +38,6 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    await Future.wait(
-      [
-        fetchData(),
-        setTasks(),
-        setMeetings(),
-        setEmails(),
-        setSlackMessages(),
-      ],
-    );
-
     calendarTask.value = List.generate(
       15,
       (index) {
@@ -61,7 +51,16 @@ class HomeController extends GetxController {
         );
       },
     );
-
+    await Future.wait(
+      [
+        fetchData(),
+        setTasks(),
+        setMeetings(),
+        setEmails(),
+        setSlackMessages(),
+      ],
+    );
+    await setCalendarTasks();
     isLoading.value = false;
   }
 
@@ -124,6 +123,29 @@ class HomeController extends GetxController {
         );
         tasks[index].status = Status.COMPLETED;
         tasks.refresh();
+      }
+    } catch (e) {}
+  }
+
+  Future<void> setCalendarTasks() async {
+    try {
+      var response = await repository.getCalendarTaskList();
+      if (response.isRight()) {
+        var list = response.getRight() ?? [];
+        for (var element in list) {
+          if (element.time?.day == DateTime.now().day &&
+              element.time?.month == DateTime.now().month &&
+              element.time?.year == DateTime.now().year) {
+            if ((element.time?.hour ?? 0) >= 5 &&
+                (element.time?.hour ?? 0) <= 19) {
+              calendarTask[(element.time?.hour ?? 5) - 5].task =
+                  tasks.firstWhereOrNull(
+                (task) => element.taskId == task.id,
+              );
+              calendarTask.refresh();
+            }
+          }
+        }
       }
     } catch (e) {}
   }
